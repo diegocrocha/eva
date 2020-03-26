@@ -1,0 +1,423 @@
+/* 
+Geral
+*/
+html{
+    scroll-behavior: smooth;
+}
+body{
+    font-family: "Open Sans", Arial, Helvetica, sans-serif;
+}
+h1, h2, h3{
+    margin: 0;
+    
+    font-family: "Roboto Slab", Arial, Helvetica, sans-serif;
+    font-weight: bold;
+}
+.buton{
+    border-radius: 5px;
+    padding: 10px 20px;
+    text-decoration:none ;
+
+    font-size: .9em;
+    
+    color: azure;
+    background-color: #292929;
+}
+/* 
+Navegação
+*/
+nav{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #292929; 
+}
+nav a img{
+   width:30px; 
+   padding: 20px;
+}
+nav ul{
+    list-style: none;
+    
+    padding: 0;
+    
+    display:flex;
+    flex-direction: column;
+    align-items: center;
+    width:100%;
+}
+nav ul li{
+    text-align: center;
+    width:100%; 
+}
+nav ul li a{
+    display: inline-block;
+    
+    padding: 10px 0;
+    width: 100%;
+    
+    font-size: 17px;
+    text-decoration: none;
+    color: azure;
+}
+nav ul li a:hover {
+    background-color: rgba(54, 54, 54, 0.452);
+    border-radius: 10px;
+}
+nav ul li a:focus{
+    color: rgb(85, 13, 255);
+}
+/* 
+Header EVA
+*/
+header{
+    background-image: url(fundo.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    text-align: center;
+    padding: 50px;
+}
+/* 
+main sections geral 
+*/
+.sections{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    
+    text-align: center;
+    padding: 20px 50px 50px;
+    
+    background-color: rgb(58, 48, 102);
+    color: white;
+
+}
+
+/* 
+main Projeto
+*/
+#projeto p{
+    margin-bottom: 2em;
+    max-width: 1000px;
+}
+
+/* 
+main Somos
+*/
+#somos{
+    background-color: rgb(135, 133, 143);
+    color: black;
+}
+#somos p{
+    margin-bottom: 2em;
+    max-width: 1000px;
+}
+
+/* 
+main Orçamento
+*/
+
+#instala{
+    background-image: url(lampada.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat; 
+}
+#instala > p{
+    margin-bottom: 2em;
+    max-width: 1000px;
+    font-size: 17px;
+}
+#instala button{
+    margin: 10px auto 20px;
+}
+#instala div{
+    margin: 40px;
+    font-size: 20px;
+}
+
+/* 
+Orçamento preto
+*/
+#fundo{
+   border-radius: 20px;
+   background-color: rgba(0, 0, 0, 0.698);
+}
+#fundo >h2{
+    margin-top: 20px;
+    font-size: 60px;
+}
+#fundo p{
+    margin: 20px;
+}
+#fundo input{
+    padding: 5px; 
+    margin-right: 20px;
+
+    text-align: center;
+
+    outline: none;
+    border-radius: 4px;
+    border: .8px solid white ;
+    
+    background: none;
+    color: white;
+}
+#fundo button{
+    padding: 7px;
+
+    border-radius: 4px;
+    border:1px solid white;
+    
+    outline:none;
+    cursor: pointer;
+   
+    background:none;
+    color: white;
+}
+
+/* 
+main Contato
+*/
+#contato{ 
+    background-color: white;
+    color: black;
+}
+
+/* 
+main entrar
+*/
+#entrar{
+    display: none;
+}
+
+/* 
+main Seta
+*/
+#seta{
+    width: 30px;
+    position: fixed;
+    bottom: 10%;
+    right:15px;
+}
+#seta:hover{
+    transform:scale(1.3);
+}
+
+/* 
+Footer
+*/
+footer{
+    text-align: center;
+    padding: 1px;
+    height: 40px;
+    
+    color: white;
+    background-color:#292929;
+}
+footer p a{
+    text-decoration:none;
+    color: white;
+}
+
+/* 
+Tela de PC
+*/
+@media screen and (min-width:740px){
+    
+    /* 
+    Nav
+    */
+    nav{
+        position: fixed;
+        width: 100%;
+        flex-direction:row ;
+        justify-content: space-around;
+    }
+    nav ul{
+        flex-direction: row;
+        width: 100%;
+    }
+    nav a{
+        padding-left: 8px;
+    }
+    nav > a:hover{
+        color: yellowgreen;
+    }
+    nav ul li a:hover{
+        transform: none;
+
+        color: yellow;
+        background-color:rgba(255, 255, 255, 0);
+    }
+
+    /* 
+    header
+    */
+    header{
+        height: 700px;
+        height: 85vh;
+        justify-content: center;
+        
+        font-size: 30px;
+    }
+     header h1{
+        font-family: Pacifico,sans-serif;
+        font-size: 80px;
+    }
+    header h3{
+        margin: 60px 0 30px;
+        
+        -webkit-text-stroke:.3px;
+        -webkit-text-stroke-color: black;
+        color: white;
+    }
+    header .buton{
+        margin: 150px 0 10px;
+        
+        background-color:rgba(5, 5, 5, 0);
+        border: black solid 3px;
+    }
+    .buton:hover{
+        color: yellow;
+        background-color: rgba(37, 37, 37, 0.466);
+    }
+
+    /* 
+    main sections geral
+    */
+    .sections{
+        height: 800px;
+        height: 89vh;
+        justify-content: center;
+    }
+
+    /* 
+    main contato
+    */
+    #contato{
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        max-width: 500px;
+        margin: 0 auto;
+        height: 35vh;
+    }
+    #contato h2{
+        font-size: 40px;
+    
+    }
+    #contato h2, p{
+        width: 100%;
+    }
+    #contato a{
+        text-decoration: none;
+        color: black;
+    }
+
+    /* 
+    main Entrar
+    */
+    #tudo.active{
+        filter: blur(3px);
+        pointer-events: none;
+        user-select: none;
+    }
+    #entrar{
+        display: block;
+        position: fixed;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+        
+        width: 300px;
+        padding: 40px;
+
+        box-shadow: 1px 20px 30px;        
+        background-color: rgba(255, 255, 255, 0.945);
+       
+        text-align: center;
+        align-items: center;
+
+        visibility: hidden;
+        opacity: 0;
+        transition: .4s;
+    }
+    #entrar.active{ 
+        top: 50%;
+        visibility: visible;
+        opacity: 1;
+        transition: .6s;
+    }
+    #entrar a{
+        position: absolute;
+        top: 0;
+        left: 100%;
+
+        border-radius: 5px;
+        padding: 10px;
+        
+        font-size: .9em;
+        text-decoration: none;
+        
+        color: white;
+        background-color: rgba(0, 0, 0, 0.76);
+    }
+    
+    /* 
+    form. Box
+    */
+    .box h1{
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        
+        font-size: 60px;
+        font-weight: 900;
+    }
+    .box p input{ 
+        display: block;
+        
+        width: 200px;
+        padding: 14px 10px;
+        margin: 30px auto;
+        text-align: center;
+
+        border: 0;
+        border-radius: 24px;
+        border: 1px solid rgba(0, 0, 0, 0.63);
+
+        outline: none;
+        transition: .3s;
+        background: none;
+    }
+    .box p input:focus{
+        width: 230px;
+        border-color: rgb(14, 128, 14);
+    }
+    .box input[type=submit]{
+        display: block;
+        cursor: pointer;
+        
+        width: 150px;
+        padding: 14px 40px;
+        margin: 30px auto;
+        text-align: center;
+
+        border: 0;
+        border-radius: 24px;
+        border: 1px solid  rgb(14, 128, 14);
+
+        outline: none;
+        transition: .3s;
+        background: none;  
+    }
+    .box input[type=submit]:hover{
+        background-color: rgba(0, 255, 0, 0.445); ;
+    }
+}
