@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eva - Orçamento</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+</head>
+<body>
+    <center>
+            <h1>Orçamento Sistema Eva</h1>
+            Dimensão do ambiente: <input type="number" id="dimensao" placeholder="em metros quadrados">
+            <span class="botao" onclick="calcular()"><a href="#">Calcular orçamento! :)</a></span>
+            <div id="res"></div>
+    </center>
+        
+</body>
+</html>
+
+<script>
+    function calcular(){
+        dimen = Number(dimensao.value);
+
+        if(dimen == 0){
+            res.innerHTML = `<strong style="color: #FF0000;">ERRO</strong> Insira um valor válido`
+        }else{
+            lux = 0;
+            tubo = 0;
+            total = 0;
+
+            lux = dimen * 300;
+            tubo = lux / 4600;
+            total = tubo * 3250;
+
+            res.innerHTML = `Um ambiente com a dimensão de ${dimen}m² é recomendado ${tubo.toFixed(0)} tubos de 
+            iluminação solar, sendo assim seu investimento será de R$${total.toFixed(2)}`;
+        }
+
+    }
+</script>
+
