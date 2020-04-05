@@ -3,48 +3,60 @@ create database EVA;
 use EVA;
 
 create table dado_empresa ( 
-	cnpj char(14) primary key,
-    empresa varchar(40),
-    email varchar(40),
-    senha varchar(16)
-    );
+	empresa_id int primary key auto_increment,
+    empresa_login varchar(40),
+    empresa_email varchar(60),
+    empresa_password varchar(16)
+    )auto_increment = 1000;
 
-	Create table login_secundario (
-		FKcnpj char(14),
-		id_login int primary key auto_increment,
-		Senha varchar(16),
+create table dado_funcionario (
+		func_id int primary key auto_increment,
+		func_login varchar(20),
+		func_passwaord varchar(16),
+        func_fk_empresa int,
     
-			foreign key(FKcnpj) references dado_empresa(cnpj)
+			foreign key(func_fk_empresa) references dado_empresa(empresa_id)
 
-)	auto_increment=1000;
+)	auto_increment=100;
 
-	Create table setores (
-		id_setor int primary key auto_increment,
-		setor varchar(40),
-		lux_padrao int,
-		
-			FKempresa char(14),
-            foreign key(FKempresa) references dado_empresa(cnpj)
-)auto_increment=1;
+create table setor (
+		setor_id int primary key auto_increment,
+		setor_nome varchar(40),
+		setor_luz_padrao int,
+		setor_fk_empresa char(14),
+        
+            foreign key(setor_fk_empresa) references dado_empresa(empresa_id)
+)auto_increment = 10;
 
-	create table arduinos (
-		id_arduino int primary key auto_increment,
-		deh datetime,
-		watts int,
-		
-			FKid_setor int,
-            foreign key(FKid_setor) references setores(id_setor)
+	create table dispositivo (
+		dispo_id int primary key auto_increment,
+		dispo_regi datetime,
+		dispo_watts int,
+		dispo_fk_setor int,
+        
+			foreign key(dispo_fk_setor) references setor(setor_id)
             
-)auto_increment=1;
+);
 
-	create table registro_arduino (
-		id_registro int primary key auto_increment,
-		dehr datetime,
-		watts int,
-		
-        FKid_arduino int,
-			foreign key(FKid_arduino) references arduinos(id_arduino)
+	create table registro_dispo (
+		regi_id int primary key auto_increment,
+		regi_dispo datetime,
+		regi_watts int,
+		regi_fk_dispo int,
+			
+            foreign key(regi_fk_dispo) references dispositivo(dispo_id)
 
-)auto_increment=1;
+);
+
+-- -- -- -- --
+-- Inserts -- --
+-- -- -- -- -- -- 
+
+desc dado_empresa;
+
+
+insert into dado_empresa values
+	()
+;
  
 
