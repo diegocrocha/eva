@@ -3,11 +3,14 @@ create database EVA;
 use EVA;
 
 create table dado_empresa ( 
-	empresa_id int primary key auto_increment,
+	empresa_id int primary key,
     empresa_login varchar(40),
     empresa_email varchar(60),
-    empresa_password varchar(16)
-    )auto_increment = 1000;
+    empresa_password varchar(16),
+    
+	check (empresa_id >0 and empresa_id <=99999999999999)
+    
+    );
 
 create table dado_funcionario (
 		func_id int primary key auto_increment,
@@ -53,8 +56,5 @@ create table setor (
 -- Inserts -- --
 -- -- -- -- -- -- 
 
-insert into dado_empresa values
-	()
-;
  
 
