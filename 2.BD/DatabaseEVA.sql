@@ -23,7 +23,7 @@ create table setor (
 		setor_id int primary key auto_increment,
 		setor_nome varchar(40),
 		setor_luz_padrao int,
-		setor_fk_empresa char(14),
+		setor_fk_empresa int,
         
             foreign key(setor_fk_empresa) references dado_empresa(empresa_id)
 )auto_increment = 10;
@@ -39,10 +39,11 @@ create table setor (
 );
 
 	create table registro_dispo (
-		regi_id int primary key auto_increment,
+		regi_id int,
+		regi_fk_dispo int,
 		regi_dispo datetime,
 		regi_watts int,
-		regi_fk_dispo int,
+        primary key (regi_id, regi_fk_dispo),
 			
             foreign key(regi_fk_dispo) references dispositivo(dispo_id)
 
@@ -51,9 +52,6 @@ create table setor (
 -- -- -- -- --
 -- Inserts -- --
 -- -- -- -- -- -- 
-
-desc dado_empresa;
-
 
 insert into dado_empresa values
 	()
