@@ -7,9 +7,14 @@ create table dado_empresa (
     empresa_login varchar(40),
     empresa_email varchar(60),
     empresa_password varchar(16),
+    empresa_cep int,
+    empresa_city varchar(40),
+    empresa_number int,
+    empresa_nbhd varchar(20),
+    empresa_treet varchar(60),
     
+    check (empresa_cep >0 and empresa_cep <=99999999),
 	check (empresa_id >0 and empresa_id <=99999999999999)
-    
     );
 
 create table dado_funcionario (
