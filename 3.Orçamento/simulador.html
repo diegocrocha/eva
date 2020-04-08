@@ -10,31 +10,49 @@
 <body>
     <center>
             <h1>Orçamento Sistema Eva</h1>
-            Dimensão do ambiente: <input type="number" id="dimensao" placeholder="em metros quadrados">
+            Valor gasto com energia ao mês: <input type="number" id="gasto" placeholder="Em R$">
+            <br>
+            <br>
+            Dimensão do ambiente: <input type="number" id="dimensao" placeholder="Em metros quadrados">
             <span class="botao" onclick="calcular()"><a href="#">Calcular orçamento! :)</a></span>
             <div id="res"></div>
     </center>
-        
+
 </body>
 </html>
 
 <script>
     function calcular(){
         dimen = Number(dimensao.value);
+        gast = Number(gasto.value);
 
         if(dimen == 0){
             res.innerHTML = `<strong style="color: #FF0000;">ERRO</strong> Insira um valor válido`
         }else{
-            lux = 0;
-            tubo = 0;
-            total = 0;
-
             lux = dimen * 300;
-            tubo = lux / 4600;
-            total = tubo * 3250;
+            tubo = lux / 6500;
+            sensor = dimen / 5;
 
-            res.innerHTML = `Um ambiente com a dimensão de ${dimen}m² é recomendado ${tubo.toFixed(0)} tubos de 
-            iluminação solar, sendo assim seu investimento será de R$${total.toFixed(2)}`;
+
+            total = (sensor * 150) + (tubo * 1200);
+
+            res.innerHTML = `Num ambiente de ${dimen.toFixed(2)}m² é recomendado 
+            ${tubo.toFixed(0)} tubos, seu investimento será de R$${total.toFixed(2)} <br>`
+        }
+
+        if(gast == 0){
+            res.innerHTML = `<strong style="color: #FF0000;">ERRO</strong> Insira um valor válido`;
+        }else{
+
+            gast = Number(gasto.value);
+
+
+            economia= 0;
+            economia = gast * 0.30;
+            pelo_servico = economia * 0.20;
+
+            res.innerHTML += `Sua economia será de R$${economia.toFixed(2)} ao mês, <br>
+            você ira pagar mensalmente pelo serviço R$${pelo_servico.toFixed(2)}`;
         }
 
     }
