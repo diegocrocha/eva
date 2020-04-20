@@ -75,6 +75,7 @@ body{
     float: left;
     width: 50%;
     text-align: center;
+    padding: 20px;
 }
 #box2{
     margin-top:110px;
@@ -99,13 +100,7 @@ border: none;
 border-radius: 5px;
 }
 .inputs{
-    margin: 3px 0;
-    width: 80%;
-    height: 32px;
-    display: list-item;
-    background: #C4C4C4;
-    border: none;
-    color: #000000;
+    
 }
 /* #sec4 input {
     margin: 3px 0;
@@ -135,4 +130,31 @@ border-radius: 5px;
 box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 border: none;
 border-radius: 0px;  
+}
+
+.box-simulador{
+    text-align: center;
+}
+
+.item{
+    margin-bottom: 30px;
+}
+
+.item input{
+    width: 25%;
+    height: 25px;
+    border: none;
+    background: none;
+    border-bottom: 1px solid #000;
+}
+
+.container{
+    background-color: rgba(168, 168, 168, 0.1);
+    text-align: center;
+    width: 100%;
+    margin: 0px auto;
+}
+
+#div_resultado{
+    color: #fefefe;
 }
