@@ -67,6 +67,9 @@ body{
     margin-top: 100px;
     background: rgba(255, 255, 255, 0.5);   
 }
+#sec1 input{
+    margin: 4px auto;
+}
 #box1{
     margin-top:90px;
     float: left;
@@ -95,7 +98,7 @@ box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 border: none;
 border-radius: 5px;
 }
-#sec4 input {
+.inputs{
     margin: 3px 0;
     width: 80%;
     height: 32px;
@@ -104,6 +107,15 @@ border-radius: 5px;
     border: none;
     color: #000000;
 }
+/* #sec4 input {
+    margin: 3px 0;
+    width: 80%;
+    height: 32px;
+    display: list-item;
+    background: #C4C4C4;
+    border: none;
+    color: #000000;
+} */
 #sec4 #msg-input{
     height: 64px;
 }

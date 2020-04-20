@@ -1,23 +1,42 @@
 <!DOCTYPE html>
 <html lang="en">
-<link rel="stylesheet" href="style.css">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculador Financeiro</title>
-    <link rel="stylesheet" href="styleSimulador.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Calculador Financeiro</title>
+<link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
     
-    <input id="nome_empresa" placeholder="Nome da empresa"><br> 
-    <input id="numero_lampada" placeholder="Nº de lâmpadas"><br> 
-    <input id="potencia_lampadas" placeholder="Potencia lampadas" > <br>
-    <input id="h_funcionamento" placeholder="Horario de funcionamento durante"> <br>    
-    <input id="metros" placeholder="Quantidades em m²"> <br>
-    <button onclick="calcular_media()">Calcular</button>
-    <div id="div_resultado"></div>
+    <div class="nav">
+        <div class="title">Project <b class="ativo">EVA</b> </div> 
+        <img src="../img/logo.png" width="50px">
+        <ul>
+            <li> <a class="ativo" href="">Home</a></li>
+            <li> <a href="">Produtos</a></li>
+            <li> <a href="">Orçamento</a></li>
+            <li> <a href="">Login</a></li>
+        </ul>
+    </div>
 
-    
+    <div class="box1">
+           <div id="sec1" class="sections">
+        <h6>Nome da Empresa:</h6>
+            <input class="inputs" type="text">
+        <h6>Quantidade de Lâmpadas:</h6>
+            <input class="inputs" type="text">
+        <h6>Potência das Lâmpadas:</h6>    
+            <input class="inputs" type="text">
+        <h6>Horário de Funcionamento (Diurno):</h6>
+            <input class="inputs" type="text">
+        <h6>Espaço em M²:</h6>
+            <input class="inputs" type="text">
+        
+        <button onclick="calcular_media()"></button>
+            </div> 
+    </div>
+
+
 </body>
 </html>
 <script>
