@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="../css/style.css">
 <link rel="stylesheet" href="../css/simulador.css">
 </head>
-<body>
+<body class="body²">
     
     <div class="nav">
         <div class="title">Project <b class="ativo">EVA</b> </div> 
@@ -86,13 +86,12 @@ function calcular_media() {
     var investimento = valor_tubo + valor_sensor;
     var retorno = investimento / desc_ano;
 
-    div_resultado.innerHTML = `A empresa: ${nome_empresa.value} gasta R$: ${valor_mes.toFixed(2)} por mês 
-                                (R$: ${valor_ano.toFixed(2)} por ano).<br>
+    div_resultado.innerHTML = `A empresa: ${nome_empresa.value} gasta <b>R$: ${valor_mes.toFixed(2)}</b> por mês 
+                                (<b>R$: ${valor_ano.toFixed(2)}</b> por ano).<br>
 
                                 Com o nosso projeto a empresa irá economizar cerca de
-                                R$: ${desc_mes.toFixed(2)} (até 40% de economia) por mês, e (R$: ${desc_ano.toFixed(2)} por ano) <br> <br>
+                                <b>R$: ${desc_mes.toFixed(2)}</b> (até 40% de economia) por mês, e (<b>R$: ${desc_ano.toFixed(2)}</b> por ano) <br> <br>
                                                          
-                                O investimento será de R$:${investimento.toFixed(2)}, esse valor lhe trará lucro a partir do ${retorno.toFixed(0)}º ano, a partir desse ano será cobrado uma anuidade de R$:${mensalidade.toFixed(2)}`;
+                                O investimento será de <b>R$:${investimento.toFixed(2)}</b>, esse valor lhe trará lucro a partir do <b>${retorno.toFixed(0)}º</b> ano, a partir desse ano será cobrado uma anuidade de <b>R$:${mensalidade.toFixed(2)}</b>`;
 }
-
 </script>
