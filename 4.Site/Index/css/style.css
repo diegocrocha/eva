@@ -26,11 +26,11 @@ body{
 .nav{
     min-width: 1000px;
     margin: 0;
-    padding: 0;
+    padding: 0 100px;
     width: 100%;
     min-width: 400px;
     height: 100px;
-    background: rgba(168, 168, 168, 0.5);
+    background: rgba(0, 0, 0, 0.3);
     color: white;
 }
 .nav .ativo{
@@ -67,6 +67,9 @@ body{
     margin-top: 100px;
     background: rgba(255, 255, 255, 0.5);   
 }
+
+/* INDEX */
+
 #sec1 input{
     margin: 4px auto;
 }
@@ -99,8 +102,17 @@ box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 border: none;
 border-radius: 5px;
 }
-.inputs{
+.inputs{    
+    margin: 3px 0;
+    width: 80%;
+    height: 32px;
+    display: list-item;
     
+    background: #C4C4C4;
+    border: none;
+    border-radius: 3px;
+    color: #000000;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 }
 /* #sec4 input {
     margin: 3px 0;
@@ -131,12 +143,13 @@ box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
 border: none;
 border-radius: 0px;  
 }
-
+/* FIM INDEX */
+/* SIMULADOR FINANCIAMENTO */
 .box-simulador{
     text-align: center;
 }
 
-.item{
+/* .item{
     margin-bottom: 30px;
 }
 
@@ -146,15 +159,37 @@ border-radius: 0px;
     border: none;
     background: none;
     border-bottom: 1px solid #000;
-}
+} */
 
 .container{
-    background-color: rgba(168, 168, 168, 0.1);
-    text-align: center;
-    width: 100%;
-    margin: 0px auto;
-}
+    width: 40%;
+    margin: 50px 30%;
+    padding: 20px 50px;
+    text-align: left;
 
+    border-radius: 20px;
+    background: rgba(168, 168, 168, 0.5);
+}
+.container h3{
+    text-align: center;
+    margin: 10px 0;
+}
+.container input{
+    width: 100%;
+}
+.container button{
+    width: 30%;
+    margin: 20px 35%; 
+
+        height: 50px;
+        font-size: 16px;
+
+        color: black;
+        background: #C4C4C4;
+    box-shadow: 4px 4px 4px rgba(0, 0, 0, 0.25);
+    border: none;
+    border-radius: 3px;
+}
 #div_resultado{
     color: #fefefe;
 }
