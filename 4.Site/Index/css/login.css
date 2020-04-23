@@ -1,61 +1,64 @@
 
 
 body {
-    background-image: url(../img/bg_login.jpg);
-    background-repeat: no-repeat;
-    background-size: 100%; 
-    padding: 0;
-    margin: 0;
+  background-image: url(../img/bg_login.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  padding: 0;
+  margin: 0;
 
 }
 
  .container {
-    width: 100%;
-    min-height: 70px;
-    margin-right: 50px;
-    height: 100%;
-    min-width: 620px;
+  width: 100%;
+  min-height: 70px;
+  margin-right: 50px;
+  height: 100%;
+  min-width: 620px;
 }
 
 .container img{    
-    width: 100px;
-    margin-top: 5%;
-    margin-left: 47%;
+  width: 7%;
+  margin-top: 2%;
+  margin-left: 46.5%;
 }
 
 .box_cadastro {
-    margin-left: 35%;
-    margin-bottom: 20px; 
-    margin-bottom: 0;
+  margin-left: 35%;
+  margin-bottom: 20px; 
+  margin-bottom: 0;
 
-    width: 30%;
-    height: 360px; 
-    background: rgba(0, 0, 0, 0.71);
-    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
-    border-radius: 20px;
+  width: 30%;
+  height: 360px; 
+  background: rgba(0, 0, 0, 0.71);
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+  border-radius: 20px;
 }
 
 .box_cadastro h2 {
-    text-align: center;
-    color: white;
-    margin-bottom: 30px;
-    padding-top: 20px;
+  text-align: center;
+  color: white;
+  margin-bottom: 30px;
+  padding-top: 20px;
 }
 
 .box_cadastro .input_u {
   
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-bottom: 25px;
-    width: 90%;
-    height: 50px;
-    font-size: 24px; 
-    border-radius: 10px;  
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 25px;
+  width: 90%;
+  height: 50px;
+  font-size: 110%; 
+  border-radius: 10px; 
+    
+    
+  color: white; 
+  background: none;
+  border-color:#86C232;
+  border-radius: 5px; 
 
-    background: none;
-    color: #6b6e70; 
-    border-color:#86C232;
-    border-radius: 5px; 
+    
     
 } 
 
@@ -102,13 +105,9 @@ a {
 .register {
   margin: auto;
   width: 28%;
-  margin-top: 40px;
+  margin-top: 1%;
+  margin-bottom: 1%;
   text-align: center;
   border-top: black solid 2px;
  
-}
-.box_cadastro #div_mensagem {
-  width: 80%;
-  padding-left: 10%;
-  padding-top: 10%;
 }

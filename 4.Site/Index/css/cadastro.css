@@ -1,60 +1,60 @@
 
 
 body {
-    background-image: url(../img/bg_login.jpg);
-    background-repeat: no-repeat;
-    background-size: 100%; 
-    padding: 0;
-    margin: 0;
+  background-image: url(../img/bg_login.jpg);
+  background-repeat: no-repeat;
+  background-size: cover; 
+  padding: 0;
+  margin: 0;
 
 }
 
  .container {
-    width: 100%;
-    min-height: 70px;
-    margin-right: 50px;
-    height: 100%;
-    min-width: 620px;
+  width: 100%;
+  min-height: 70px;
+  margin-right: 50px;
+  height: 100%;
+  min-width: 620px;
     
 }
 
 .container img{    
-    width: 100px;
-    margin-top: 2%;
-    margin-left: 47%;
+  width: 7%;
+  margin-top: 2%;
+  margin-left: 46.5%;
 }
 
 .box_cadastro {
-    margin-left: 30%;
-    margin-bottom: 1%; 
+  margin-left: 30%;
+  margin-bottom: 1%; 
 
-    width: 40%;
-    height: 710px; 
-    background: rgba(34, 38, 41, 0.85);
-    border-radius: 20px;
+  width: 40%;
+  height: 80%; 
+  background: rgba(34, 38, 41, 0.85);
+  border-radius: 20px;
 }
 
 .box_cadastro h2 {
-    text-align: center;
-    color: white;
-    margin-bottom: 30px;
-    padding-top: 20px;
+  text-align: center;
+  color: white;
+  margin-bottom: 30px;
+  padding-top: 20px;
 }
 
 .box_cadastro .input_u {
   
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-bottom: 25px;
-    width: 90%;
-    height: 30px;
-    font-size: 15px; 
-    border-radius: 10px; 
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 25px;
+  width: 90%;
+  height: 30px;
+  font-size: 15px; 
+  border-radius: 10px; 
     
-    background: none;
-    color: #6b6e70; 
-    border-color:#86C232;
-    border-radius: 5px; 
+  background: none;
+  color: #6b6e70; 
+  border-color:#86C232;
+  border-radius: 5px; 
     
 } 
 
@@ -68,9 +68,9 @@ body {
   border-radius: 10px; 
   
   background: none;
-    color: #6b6e70; 
-    border-color:#86C232;
-    border-radius: 5px; 
+  color: #6b6e70; 
+  border-color:#86C232;
+  border-radius: 5px; 
   
 } 
 
@@ -99,17 +99,7 @@ body {
 .box_cadastro button:hover {
   background: #86C232;
 }
-.box_cadastro .check {
-  margin-left: 5%;
-  
-}
 
-
-
-.box_cadastro .forgot_pass {
-  float: right;
-  padding-right: 5%;
-} 
 
 a {
   text-decoration: none;
@@ -124,9 +114,4 @@ a {
   text-align: center;
   border-top: black solid 2px;
  
-}
-.box_cadastro #div_mensagem {
-  width: 80%;
-  padding-left: 10%;
-  padding-top: 10%;
 }
