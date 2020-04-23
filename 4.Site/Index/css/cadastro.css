@@ -15,21 +15,21 @@ body {
     margin-right: 50px;
     height: 100%;
     min-width: 620px;
+    
 }
 
 .container img{    
     width: 100px;
-    margin-top: 5%;
+    margin-top: 2%;
     margin-left: 47%;
 }
 
 .box_cadastro {
-    margin-left: 35%;
-    margin-bottom: 20px; 
-    margin-bottom: 0;
+    margin-left: 30%;
+    margin-bottom: 1%; 
 
-    width: 30%;
-    height: 360px; 
+    width: 40%;
+    height: 710px; 
     background: rgba(0, 0, 0, 0.71);
     box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 20px;
@@ -48,11 +48,24 @@ body {
     margin-right: 5%;
     margin-bottom: 25px;
     width: 90%;
-    height: 50px;
-    font-size: 24px; 
+    height: 30px;
+    font-size: 15px; 
     border-radius: 10px;  
     
 } 
+
+.box_cadastro .input_u2 {
+  
+  margin-left: 5%;
+  margin-bottom: 25px;
+  width: 25.8%;
+  height: 30px;
+  font-size: 15px; 
+  border-radius: 10px;  
+  
+} 
+
+
 
 .box_cadastro button {
   
@@ -91,7 +104,8 @@ a {
 .register {
   margin: auto;
   width: 28%;
-  margin-top: 40px;
+  margin-top: 1%;
+  margin-bottom: 1%;
   text-align: center;
   border-top: black solid 2px;
  
