@@ -51,14 +51,16 @@ body {
     height: 50px;
     font-size: 24px; 
     border-radius: 10px;  
+
+    background: none;
+    color: #6b6e70; 
+    border-color:#86C232;
+    border-radius: 5px; 
     
 } 
 
 .box_cadastro button {
-  
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
+
   text-align: center;
   text-decoration: none;
   margin-left: 5%;
@@ -68,7 +70,16 @@ body {
   height: 50px;
   font-size: 24px;
   border-radius: 10px;
+
+  color: white; 
+  background: none;
+  border-color:#86C232;
+  border-radius: 5px; 
  
+}
+
+.box_cadastro button:hover {
+  background: #86C232;
 }
 
 .box_cadastro .check {
