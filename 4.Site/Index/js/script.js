@@ -26,7 +26,7 @@ function calcular_media() {
     var investimento = valor_tubo + valor_sensor;
     var retorno = investimento / desc_ano;
 
-    div_mensagem.innerHTML = `A empresa: ${nome_empresa.value} gasta <b>R$: ${valor_mes.toFixed(2)}</b> por mês 
+    myPopup.innerHTML = `A empresa: ${nome_empresa.value} gasta <b>R$: ${valor_mes.toFixed(2)}</b> por mês <br> 
                                 (<b>R$: ${valor_ano.toFixed(2)}</b> por ano).<br>
 
                                 Com o nosso projeto a empresa irá economizar cerca de

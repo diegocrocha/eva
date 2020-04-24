@@ -5,21 +5,29 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Eva-Home</title>
     <link rel="stylesheet" href="../css/style-2.css">
+    <script src="../js/script.js"></script>
     
 </head>
 <body>
 
-    <div id="sec1" class="sections"> 
+    <!-- <div class="popup-bg">
+        <div class="popup-box">
+            <img src="../img/close.png">
+            <div class="msg"></div>
+        </div>
+    </div> -->
+
+    <div id="sec1"> 
             <div class="logo"> <img src="../img/logo.png"> <h2>EVA</h2></div>
                     <ul>
-                        <li><a href=""> <img src="../img/facebook.png"></a></li>
-                        <li><a href=""> <img src="../img/facebook.png"></a></li>
-                        <li><a href=""> <img src="../img/facebook.png"></a></li>
-                        <li><a href=""> <img src="../img/facebook.png"></a></li>
+                        <li><a href="https://www.facebook.com/"> <img src="../img/facebook.png"></a></li>
+                        <li><a href="https://www.instagram.com/accounts/login/?"> <img src="../img/instagram.png"></a></li>
+                        <li><a href="https://twitter.com/login?lang=pt"> <img src="../img/twitter.png"></a></li>
+                        <li><a href="https://www.linkedin.com/login?fromSignIn=true&trk=guest_homepage-basic_nav-header-signin"> <img src="../img/linkedin.png"></a></li>
                     </ul>
                     <div class="box-meio">
                         <h1> FAZER A DIFERENÇA FAZ BEM </h1>
-                        <button> <a href="#nav"> Sobre nós </a> </button>
+                        <a href="#nav"><button>  Sobre nós  </button></a>
                     </div>
         
         
@@ -38,9 +46,6 @@
 
     </div>
 
-<section class="all-sections">
-
-
     <div id="sec2" class="sections">
             <div id="box1">
                 <h1>Sobre Nós:</h1>
@@ -56,11 +61,11 @@
             <div id="box2">
                 
                 Nome
-             <input class="inputs" placeholder="">
+             <input class="inputs">
              E-mail
-             <input class="inputs" placeholder="">
+             <input class="inputs">
              Mensagem
-             <input class="inputs" id="msg-input" placeholder="">
+             <input class="inputs" id="msg-input">
              <button>Enviar</button>
              </div>
     </div>
@@ -89,7 +94,7 @@
 
     <div id="sec3" class="sections">
 
-        <div id="box1" class="boxs">
+        <div id="box1">
         <h1>
             Como podemos te ajudar?
         </h1>
@@ -102,7 +107,7 @@
             </div>
         </div>
 
-        <div id="box2" class="boxs">
+        <div id="box2">
             
             <input class="inputs" id="nome_empresa" placeholder="Nome da Cliente">
             
@@ -113,8 +118,12 @@
             <input class="inputs" id="h_funcionamento" placeholder="Horário de funcionamento">
 
             <input class="inputs" id="metros" placeholder="Metros²">
+            
+                <div class="popup">
+                <a onclick="myFunction()"><span class="popuptext" id="myPopup"></span></a>
+                </div>
 
-            <a id="a_but" href="orcamento.html"><button>Simular Orçamento</button></a>
+            <button onclick="myFunction(), calcular_media()">Simular Orçamento</button>
             </div>
 
         </div>
@@ -144,7 +153,11 @@
                 </li>
             </ul>
         </div>
-
-</section>
 </body>
 </html>
+<script>
+    function myFunction() {
+  var popup = document.getElementById("myPopup");
+  popup.classList.toggle("show");
+}
+</script>
