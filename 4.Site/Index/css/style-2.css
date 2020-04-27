@@ -62,6 +62,21 @@ body{
     background: #222629;
     color: #6b6e70;
 }
+.logo{
+    float: left;
+    width: 100px;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+.logo h2 {
+    margin-left: 2px;
+    display: inline-flex;
+    color: black;
+}
+.logo img{
+    width: 25px;
+}
 
 /* ===> SECTIONS END <=== */
 /* ===> ----NAV---- <=== */
@@ -132,19 +147,6 @@ body{
     background: url(../img/bg2.jpg);
     background-size: cover;
     background-repeat: no-repeat;
-}
-#sec1 .logo{
-    float: left;
-    width: 100px;
-    margin: 0;
-    padding: 0;
-    display: flex;
-}
-.logo h2 {
-    margin-left: 2px;
-}
-.logo img{
-    width: 25px;
 }
 #sec1 li{
     margin: 0 2px;
@@ -474,4 +476,41 @@ body{
     text-align: center;
     border-top: black solid 2px;
        
+    }
+
+    /* ==>Profile Page <== */
+
+    .profile-menu{
+        padding: 2vh;
+        margin: 0;
+        width: 30vh;
+        height: 100vh;
+
+        background: #222629;
+        color: #6b6e70;
+    }
+    .profile-menu ul{
+        float: left;
+        margin: 0;
+        margin-top: 2vh;
+        padding: 0;
+        list-style: none;
+    }
+    .profile-menu li {
+        margin: 0;
+        padding: 3vh 0;
+    }
+    .profile-menu li a{
+        color: #6b6e70;
+    }
+    .profile-menu li a:hover{
+        color: #86C232;
+    }
+    .bg-profile{
+        margin: 0;
+        padding: 2vh;
+        width: 70vh;
+        height: 100vh;
+        display: flexbox;
+        background: black;
     }
