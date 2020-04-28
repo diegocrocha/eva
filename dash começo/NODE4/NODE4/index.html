@@ -30,37 +30,40 @@
 		context.canvas.width = 1000;
 		context.canvas.height = 300;
         
-        var configuration = {
-			type: 'line',
-			data: {
-				datasets: [{
-					label: "Luminosidade x Time",
-					type: 'line',
-				}]
-			},
-			options: {
-				scales: {
-					xAxes: [{
-						//type: 'value',
-						distribution: 'series',
+		var configuration = {
+            type: 'line',
+            data: {
+                datasets: [{
+                    label: "Luminosidade x Time",
+                    type: 'line',
+                    backgroundColor: window.chartColors.red,
+				borderColor:window.chartColors.red,
+				fill: false,
+                }]
+            },
+            options: {
+                scales: {
+                    xAxes: [{
+                        //type: 'value',
+                        distribution: 'series',
                         ticks: {
                             beginAtZero:true
                         }
-					}],
-					yAxes: [{
-						scaleLabel: {
-							display: true,
-							labelString: 'Temperature'
+                    }],
+                    yAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: 'Luminosidade'
                         },
                         ticks: {
                             beginAtZero:true
                         }
-					}]
-				},
-				animation: {
-					duration: 0
-				}
-			}
+                    }]
+                },
+                animation: {
+                    duration: 0
+                }
+            }
         };
         
 		var chart = new Chart(context, configuration);
@@ -74,6 +77,12 @@
         this.time = 0;
 
         function get_data(){
+
+			var agora = new Date();
+			var hora = agora.getHours();
+			var minuto = agora.getMinutes();
+			var segundo = agora.getSeconds();
+			var momento = `${hora>9?'':'0'}${hora}:${minuto>9?'':'0'}${minuto}:${segundo>9?'':'0'}${segundo}`;
 
             var http = new XMLHttpRequest();
             http.open('GET', 'http://localhost:3000/api', false);
@@ -96,7 +105,7 @@
                     chart.data.datasets[0].data.shift();
                 }
 
-                chart.data.labels.push(this.time++);
+                chart.data.labels.push(momento);
                 chart.data.datasets[0].data.push(parseFloat(data));
                 chart.update();
 			});
