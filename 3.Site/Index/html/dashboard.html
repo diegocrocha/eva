@@ -27,16 +27,16 @@
             <li><a href="">Configurações</a></li>
             <li><a href="">Sair</a></li>
         </ul>
-    </section> 
+    </section>
     
     <div class="box-dash">
-        <section class="box">
-		<h2>Média: <label id='average'>0.00</label></h2>
-		<h2>Média Hora: <label id='averageHour'>0.00</label></h2>
-	</section>
-	<section style="width:100%">
-		<canvas id="chart"></canvas>
-	<section>
+        <section>
+        <h2>Média: <label id='average'>0.00</label></h2>
+        <h2>Média Hora: <label id='averageHour'>0.00</label></h2>
+    </section>
+    <section style="width:100%">
+        <canvas id="chart"></canvas>
+    <section>
     </div>
 	
 	<script>
@@ -49,10 +49,10 @@
             type: 'line',
             data: {
                 datasets: [{
-                    label: "Luminosidade x Time",
+                    label: "ohm/lux x Time",
                     type: 'line',
-                    backgroundColor: window.chartColors.red,
-				borderColor:window.chartColors.red,
+                    backgroundColor: window.chartColors.green,
+				borderColor:window.chartColors.green,
 				fill: false,
                 }]
             },
@@ -68,7 +68,7 @@
                     yAxes: [{
                         scaleLabel: {
                             display: true,
-                            labelString: 'Luminosidade'
+                            labelString: 'ohm/lux'
                         },
                         ticks: {
                             suggestedMin: 300,

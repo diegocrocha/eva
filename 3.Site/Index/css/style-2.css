@@ -483,8 +483,9 @@ body{
     .profile-menu{
         padding: 4vh;
         margin: 0;
-        width: 20vh;
-        height: 100vh;
+        width: 200px;
+        height: 100%;
+        position: fixed;
 
         background: #222629;
         color: #6b6e70;
@@ -508,6 +509,8 @@ body{
     }
 
     .box-dash{
-        width: 50%;
-        background: gray;
+        position: fixed;
+        margin: 100px 250px;
+        width: 80%;
+        background: none;
     }
