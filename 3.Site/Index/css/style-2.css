@@ -506,3 +506,8 @@ body{
     .profile-menu li a:hover{
         color: #86C232;
     }
+
+    .box-dash{
+        width: 50%;
+        background: gray;
+    }

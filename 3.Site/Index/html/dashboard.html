@@ -28,14 +28,17 @@
             <li><a href="">Sair</a></li>
         </ul>
     </section> 
-
-	<section class="box">
+    
+    <div class="box-dash">
+        <section class="box">
 		<h2>Média: <label id='average'>0.00</label></h2>
 		<h2>Média Hora: <label id='averageHour'>0.00</label></h2>
 	</section>
 	<section style="width:100%">
 		<canvas id="chart"></canvas>
 	<section>
+    </div>
+	
 	<script>
 
 		var context = document.getElementById("chart").getContext("2d");
