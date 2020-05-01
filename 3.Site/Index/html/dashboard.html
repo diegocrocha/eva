@@ -7,14 +7,14 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
 	<script src="http://www.chartjs.org/dist/2.7.1/Chart.js"></script>
     <script src="http://www.chartjs.org/samples/latest/utils.js"></script>
-    <link rel="stylesheet" href="style-2.css">
 	<style>
 		canvas {
 			-moz-user-select: none;
 			-webkit-user-select: none;
-			-ms-user-select: none;
-		}
+            -ms-user-select: none;
+        }
     </style>
+    <link rel="stylesheet" href="../css/style-2.css">
     
 </head>
 
@@ -27,11 +27,9 @@
             <li><a href="">Configurações</a></li>
             <li><a href="">Sair</a></li>
         </ul>
-    </section>
-    <section class="bg-profile"> 
+    </section> 
 
-
-	<section>
+	<section class="box">
 		<h2>Média: <label id='average'>0.00</label></h2>
 		<h2>Média Hora: <label id='averageHour'>0.00</label></h2>
 	</section>
@@ -71,7 +69,7 @@
                         },
                         ticks: {
                             suggestedMin: 300,
-                            suggestedMax: 500,
+                            suggestedMax: 600,
                             beginAtZero:false
                         }
                     }]

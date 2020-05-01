@@ -481,9 +481,9 @@ body{
     /* ==>Profile Page <== */
 
     .profile-menu{
-        padding: 2vh;
+        padding: 4vh;
         margin: 0;
-        width: 30vh;
+        width: 20vh;
         height: 100vh;
 
         background: #222629;
@@ -492,7 +492,7 @@ body{
     .profile-menu ul{
         float: left;
         margin: 0;
-        margin-top: 2vh;
+        margin-top: 3vh;
         padding: 0;
         list-style: none;
     }
@@ -505,12 +505,4 @@ body{
     }
     .profile-menu li a:hover{
         color: #86C232;
-    }
-    .bg-profile{
-        margin: 0;
-        padding: 2vh;
-        width: 70vh;
-        height: 100vh;
-        display: flexbox;
-        background: black;
     }
