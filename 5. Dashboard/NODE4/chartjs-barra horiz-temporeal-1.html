@@ -14,8 +14,8 @@
         }
 
         .gradiente {
-            background: rgb(255,0,48);
-            background: linear-gradient(90deg, rgba(255,0,48,1) 0%, rgba(164,128,132,1) 49%, rgba(66,58,213,1) 100%);
+            background: rgb(255,0,0);
+            background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(245,255,0,1) 25%, rgba(0,255,29,1) 50%, rgba(245,255,0,1) 75%, rgba(255,0,0,1) 100%);
         }
     </style>
 </head>
@@ -68,7 +68,7 @@
 				leitura: Number(sortearTemperatura())
 			};
 
-            var posicao = (novoRegistro.leitura + ajusteLimiteMin) / (maximo()+ajusteLimiteMin) * 100;
+            var posicao = (novoRegistro.leitura + ajusteLimiteMin) / (maximo()) *100;
 			
             div_posicao.style.marginLeft = `${posicao}%`;
             b_leitura.innerHTML = novoRegistro.leitura;
