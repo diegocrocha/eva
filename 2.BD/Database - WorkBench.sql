@@ -1,15 +1,56 @@
 create database EVA;
 use EVA;
 create table Cliente_Matriz(
-id_Cliente int primary key auto_increment,
-cliente_representante varchar(40),
-representante_email varchar(100),
-empresa varchar(40),
-CNPJ char (18),
-cliente_tel1 char(13),
-cliente_tel2 char(13),
-categoria varchar(40)
+	id_Cliente int primary key auto_increment,
+	cliente_representante varchar(40),
+	representante_email varchar(100),
+	empresa varchar(40),
+	CNPJ char (18),
+	cliente_tel1 char(13),
+	cliente_tel2 char(13),
+	categoria varchar(40)
 )auto_increment = 0001;
+
+create table Estabelecimento(
+	id_Estab int primary key auto_increment,
+	responsável varchar (20),
+	fk_idCliente int,
+	CEP char (9),
+	numero varchar (4),
+	complemento varchar (20),
+	foreign key (fk_idCliente) references Cliente_Matriz (id_Cliente)
+) auto_increment = 10;
+
+create table Acesso(
+	id_Acesso int primary key auto_increment,
+	email varchar (30),
+	senha varchar (10),
+	fk_id_Estab int,
+	foreign key (fk_id_Estab) references Estabelecimento (id_Estab)
+) auto_increment=300;
+
+create table Setor(
+	id_Setor_Estab int primary key auto_increment,
+	nome_Setor varchar (30),
+	frequência_setor  varchar (30),
+	faixa_luzpadrão_setor varchar (30),
+	fk_id_Estab int,
+	foreign key (fk_id_Estab) references Estabelecimento (id_Estab)
+) auto_increment = 100;
+
+create table Sensor(
+	idSensor  int primary key auto_increment,
+	fk_id_Setor_Estab int,
+	foreign key (fk_id_Setor_Estab) references Setor (id_Setor_Estab)
+) auto_increment = 100;
+
+create table DadosSensor(
+	id_dados int primary key auto_increment,
+	dataH_Registro datetime,
+	luminosidade_Registrada int,
+	fk_idSensor int,
+	foreign key (fk_idSensor) references Sensor (idSensor)
+)  auto_increment = 10000;
 
 insert into Cliente_Matriz values
 (null,'Renato','renato@grandcru.com.br','Grand Cru','05.089.637/0001-10','(11)4756-9988','','Vinícola'),
@@ -19,16 +60,6 @@ insert into Cliente_Matriz values
 ;
 select * from Cliente_Matriz;
 
-create table Estabelecimento(
-id_Estab int primary key auto_increment,
-responsável varchar (20),
-fk_idCliente int,
-CEP char (9),
-numero varchar (4),
-complemento varchar (20),
-foreign key (fk_idCliente) references Cliente_Matriz (id_Cliente)
-) auto_increment = 10;
-
 insert into Estabelecimento values
 (null, 'José Fabiano',0001,'02345-574','884','bloco B'),
 (null,'Cristiano Augusto',0002, '02364-528','182','Prédio A'),
@@ -37,28 +68,12 @@ insert into Estabelecimento values
 
 select * from Estabelecimento; 
 
-create table Acesso(
-id_Acesso int primary key auto_increment,
-email varchar (30),
-senha varchar (10),
-fk_id_Estab int,
-foreign key (fk_id_Estab) references Estabelecimento (id_Estab)) auto_increment=300;
-
 insert into Acesso values 
 (null,'josefabiano@gmail.com','12345678',10),
 (null,'Cristianoaugusto@gmail.com','87654321',11),
 (null,'sarahalvez@gmail.com','53426sah',12),
 (null,'martacristo@gmail.com','982675gab',13);
 select * from Acesso;
-
-create table Setor(
-id_Setor_Estab int primary key auto_increment,
-nome_Setor varchar (30),
-frequência_setor  varchar (30),
-faixa_luzpadrão_setor varchar (30),
-fk_id_Estab int,
-foreign key (fk_id_Estab) references Estabelecimento (id_Estab)
-) auto_increment = 100;
 
 insert into Setor values
 (null,'Tintos', '500', '3',10),
@@ -75,12 +90,6 @@ insert into Setor values
 
 select * from Setor; 
 
-create table Sensor(
-idSensor  int primary key auto_increment,
-fk_id_Setor_Estab int,
-foreign key (fk_id_Setor_Estab) references Setor (id_Setor_Estab)
-) auto_increment = 100;
-
 insert into Sensor values
 (null, 100),
 (null, 101),
@@ -95,14 +104,6 @@ insert into Sensor values
 (null, 110);
 
 select * from Sensor; 
-
-create table DadosSensor(
-id_dados int primary key auto_increment,
-dataH_Registro datetime,
-luminosidade_Registrada int,
-fk_idSensor int,
-foreign key (fk_idSensor) references Sensor (idSensor)
-)  auto_increment = 10000;
 
 insert into DadosSensor values
 (null,'2020-03-20 08:00:00', 500,100),
