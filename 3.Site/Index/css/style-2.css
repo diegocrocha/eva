@@ -508,9 +508,28 @@ body{
         color: #86C232;
     }
 
-    .box-dash{
+    .dash{
         position: fixed;
-        margin: 100px 250px;
+        margin: 50px 250px;
         width: 80%;
-        background: none;
+
+        background: white;
+        border-radius: 10px;
+        border: 2px solid #86C232;
+        box-shadow: 4px 4px 4px 4px rgba(124, 87, 87, 0.4);
+    }
+
+    .dash-boxes{
+        padding: 1%;
+        margin: 2%;
+        
+        border-radius: 10px;
+        background: white;
+        box-shadow: 4px 4px 4px 4px rgba(124, 87, 87, 0.4);
+    }
+
+    .gradiente {
+        margin: 0 auto;
+        background: rgb(255,0,0);
+        background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(245,255,0,1) 25%, rgba(0,255,29,1) 50%, rgba(245,255,0,1) 75%, rgba(255,0,0,1) 100%);
     }

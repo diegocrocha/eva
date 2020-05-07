@@ -68,7 +68,7 @@
 				leitura: Number(sortearTemperatura())
 			};
 
-            var posicao = (novoRegistro.leitura + ajusteLimiteMin) / (maximo()) *100;
+            var posicao = (novoRegistro.leitura - ajusteLimiteMin) / (ajusteLimiteMin) *100;
 			
             div_posicao.style.marginLeft = `${posicao}%`;
             b_leitura.innerHTML = novoRegistro.leitura;

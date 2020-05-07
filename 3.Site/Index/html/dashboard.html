@@ -13,6 +13,7 @@
 			-webkit-user-select: none;
             -ms-user-select: none;
         }
+        
     </style>
     <link rel="stylesheet" href="../css/style-2.css">
     
@@ -29,14 +30,33 @@
         </ul>
     </section>
     
-    <div class="box-dash">
-        <section>
-        <h2>Média: <label id='average'>0.00</label></h2>
-        <h2>Média Hora: <label id='averageHour'>0.00</label></h2>
-    </section>
-    <section style="width:100%">
-        <canvas id="chart"></canvas>
-    <section>
+    <div class="dash">
+
+        <div class="dash-boxes">
+
+            <h3>Última leitura:</h3>
+            <div style="width: 60%;" class="gradiente">
+                <div id="div_posicao" style="margin-left:0%; font-size: 20pt;">
+                    <b id="b_leitura">0</b>
+                </div>
+            </div>
+        
+            <!-- <br>
+            Mínimo: <b id="b_min"></b> <br>
+            Máximo: <b id="b_max"></b> <br> -->
+            
+        </div>
+
+        <div class="dash-boxes">
+            <section>
+                <h3>Média: <label id='average'>0.00</label></h3>
+                <!-- <h2>Média Hora: <label id='averageHour'>0.00</label></h2> -->
+            </section>
+            <section style="width:100%">
+                <canvas id="chart"></canvas>
+            <section>
+        </div>
+ 
     </div>
 	
 	<script>
@@ -78,7 +98,7 @@
                     }]
                 },
                 animation: {
-                    duration: 0
+                    duration: 1000
                 }
             }
         };
@@ -137,7 +157,7 @@
 			// });
 			
 			document.getElementById('average').textContent = obj.average;
-			document.getElementById('averageHour').textContent = obj.averageHour;
+			// document.getElementById('averageHour').textContent = obj.averageHour;
 		} 
 		
 		get_data();
@@ -145,6 +165,51 @@
         setInterval(() => {
             get_data();
         }, 1000);
+
+        // ====> FIM GRÁFICO <==== //
+
+        // ====> ALERTA ! <==== //
+
+    function maximo() {
+        return 600;
+    }
+
+    function minimo() {
+        return 300;
+    }
+
+	// esse "sortearTemperatura()" será desnecessário quando usarmos o backend futuramente
+	// function sortearTemperatura() {
+    //     var minimoAbsoluto = Math.abs(minimo());
+	// 	return ((Math.random() * 300) + 300).toFixed(1);
+	// }
+
+    function receberNovasLeituras() {
+		setTimeout(() => {
+
+            // b_max.innerHTML = maximo();
+            // b_min.innerHTML = minimo();
+
+            var ajusteLimiteMin = Math.abs(minimo());
+
+			// esse "novoRegistro" será recuperado do backend futuramente
+			var novoRegistro = {
+				momento: '00:00:00', // tanto faz
+				leitura: parseInt(listTemp)
+			};
+
+            var posicao = (novoRegistro.leitura - ajusteLimiteMin) / (ajusteLimiteMin) *100;
+			
+            div_posicao.style.marginLeft = `${posicao}%`;
+            b_leitura.innerHTML = novoRegistro.leitura;
+
+			receberNovasLeituras();	
+
+		}, 1000); // 1000 ms -> 1 segundo
+	}
+
+
+    window.onload = receberNovasLeituras;
 
 	</script>
 </body>
