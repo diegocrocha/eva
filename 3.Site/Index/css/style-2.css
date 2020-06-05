@@ -511,7 +511,7 @@ body{
     .dash{
         position: fixed;
         margin: 50px 250px;
-        width: 80%;
+        width: 0%;
 
         background: white;
         border-radius: 10px;
