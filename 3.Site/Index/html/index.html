@@ -156,6 +156,12 @@
 </body>
 </html>
 <script>
+
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src = "https://eva.ngdesk.com/widgets/chat/5ed019dcee77fa00070ae34e/chat_widget.js";
+    document.getElementsByTagName("head")[0].appendChild(script);
+
     function myFunction() {
   var popup = document.getElementById("myPopup");
   popup.classList.toggle("show");
