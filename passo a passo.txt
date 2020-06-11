@@ -1,0 +1,33 @@
+É PARA POPULAR O BANCO DE DADOS
+	
+	projeto-aquisicao-local>projeto-node-local
+
+	abrir o terminal git
+
+	comando npm i
+
+	npm start
+	
+	mensagem que dará apos npm start:
+	> meuleitor-arduino@0.0.0 start C:\Users\admin\Desktop\eva\projeto-aquisicao-local\projeto-node-local
+	> node insert-banco.js
+
+
+PARA VALIDAR DADOS
+	
+	projeto-site
+
+	abrir o terminal git
+
+	comando npm i
+
+	comando npm i -g nodemon
+
+	comando nodemon --exec npm start
+		ou npm start
+
+	url: http://localhost:3000/login.html
+
+	login: josefabiano@gmail.com    senha: 12345678
+
+
