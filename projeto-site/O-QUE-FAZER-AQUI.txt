@@ -14,3 +14,9 @@ npm start
   localhost:3000/usuarios
   localhost:3000/leituras/ultimas
 Deve aparecer o conteúdo das tabelas de usuário e de aquisição de dados
+
+
+
+http://localhost:3000/login.html
+
+josefabiano@gmail.com    12345678
