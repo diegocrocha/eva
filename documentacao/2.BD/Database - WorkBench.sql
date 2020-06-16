@@ -49,9 +49,8 @@ create table tb_sensor(
 create table tb_registro(
 	registro datetime primary key,
 	luminosidade double(10,2),
-	fk_setor_id int,
-		foreign key (fk_setor_id) references tb_setor (setor_id)
-)  auto_increment = 10000;
+	fk_setor_id int
+);
 
 -- ------------------------------------------------------------- INSERTS ------------------------------------------------------------- --
 

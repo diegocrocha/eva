@@ -478,14 +478,37 @@ body{
        
     }
 
-    /* ==>Profile Page <== */
+    /* ==>DashBoard Page <== */
+
+    .container-forte{
+        display: flex;
+        width: 100vw;
+        height: 100vh;
+    }
+
+    .header-dash{
+        padding: 0 25px;
+        height: 8vh;
+        background: rgba(0, 0, 0, 0.71);
+        display: flex;
+        align-items: center;
+    }
+
+    .logo-dash{
+        margin-left: 42%;
+        width: 100px;
+        display: flex;
+    }
+
+    .logo-dash img {
+        width: 25px;
+    }
 
     .profile-menu{
         padding: 4vh;
         margin: 0;
-        width: 200px;
-        height: 100%;
-        position: fixed;
+        height: 100vh;
+        overflow: hidden;
 
         background: #222629;
         color: #6b6e70;
@@ -508,15 +531,36 @@ body{
         color: #86C232;
     }
 
+    .container-dash{
+        padding: 25px 5%;
+        width: 100%;
+        height: 100vh;
+    }
+
+    .dash-cima{
+        width: 100%;
+        height: 450px;
+        padding: 25px 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .dash-baixo{
+        width: 100%;
+        height: 450px;
+        padding: 25px 0;
+    }
+
     .dash{
-        position: fixed;
-        margin: 50px 250px;
-        width: 0%;
+        width: 49%;
+        height: 400px;
+        min-height: max-content;
+
 
         background: white;
         border-radius: 10px;
         border: 2px solid #86C232;
-        box-shadow: 4px 4px 4px 4px rgba(124, 87, 87, 0.4);
+        box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.4);
     }
 
     .dash-boxes{
@@ -532,4 +576,17 @@ body{
         margin: 0 auto;
         background: rgb(0,5,255);
         background: linear-gradient(90deg, rgba(0,5,255,1) 0%, rgba(0,171,152,1) 25%, rgba(0,255,29,1) 50%, rgba(245,255,0,1) 75%, rgba(255,132,0,1) 100%); 
+    }
+
+    .graficos{
+        margin: 0;
+        width: 90%;
+        height: 300px;
+        border-radius: 10px;
+        margin-top: 28px;
+        margin-left: 50px;
+    }
+
+    .g-grafico-mensal{ 
+        width: 100%;
     }
