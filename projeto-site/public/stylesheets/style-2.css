@@ -144,7 +144,7 @@ body{
     margin: 0;
     padding: 20px 15%;
     height: 1000px;
-    background: url(../img/bg2.jpg);
+    background: url(/bg2.jpg);
     background-size: cover;
     background-repeat: no-repeat;
 }
@@ -340,7 +340,7 @@ body{
 
     .body_c {
         
-    background-image: url(../img/bg_login.jpg);
+    background-image: url(/bg_login.jpg);
     background-repeat: no-repeat;
     background-size: cover; 
     padding: 0;

@@ -1,33 +1,61 @@
 <!DOCTYPE html>
-<html lang="pt">
-
+<html lang="en">
 <head>
+    <link rel="icon" href="logo.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Página com exemplo de Autenticação (Login)</title>
-
+    <title>Login</title>
+    <link rel="stylesheet" href="/stylesheets/style-2.css">
+    
 </head>
-
-<body>
-
-    <form id="form_login" method="post" onsubmit="return entrar()">
-        Usuário: <input type="text" name="login">
-        <br>
-        Senha: <input type="password" name="senha">
-        <br>
-        <button id="btn_entrar">Entrar</button>
-    </form>
+<body class="body_c">
+   
+    <a href="index.html" class="return"><img src="home.png">Home</a>
     
-    <img src="aguarde.gif" id="img_aguarde" style="display: none;">
+
+    <div class="container">
+        <img src="logo2.png">
+        
+        <div class="box_cadastro" id="box_login">
+            
+            <h2>Sign In:</h2>
+            <form id="form_login" method="post" onsubmit="return entrar()">
+                <input class="input_u" type="text" placeholder="Username ou E-mail" name="login">           
+                <input class="input_u" type="password" placeholder="Senha" name="senha">
+        
+                <button id="btn_entrar">Entrar</button>
+
+            </form>
+               
+            
+
+            <input class="check" type="checkbox"> Lembrar-se 
+
+            <a href="" class="forgot_pass">Esqueceu senha?</a>
+
+
+
+        </div>
+
+        
+        <div class="register">
+                Não tem uma conta? <a href="cadastro.html">REGISTRE-SE AQUI</a> 
+        </div>  
+        
+        <img src="aguarde.gif" id="img_aguarde" style="display: none;">
     
-    <div id="div_erro" style="background-color: sandybrown; color: maroon; display: none;">
+        <div id="div_erro" style="background-color: sandybrown; color: maroon; display: none;">
         
     </div>
 
-</body>
 
+
+
+
+
+</body>
 </html>
+
 <script>
 
     function entrar() {
@@ -45,7 +73,7 @@
                     sessionStorage.login_usuario_meuapp = json.acesso_email;
                     sessionStorage.nome_usuario_meuapp = json.acesso_email;
                     
-                    window.location.href = 'grafico-chartjs.html';
+                    window.location.href = 'dashboard.html';
                 });
 
             } else {

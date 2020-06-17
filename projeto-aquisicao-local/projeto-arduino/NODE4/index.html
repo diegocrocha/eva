@@ -101,7 +101,7 @@
 			var momento = `${hora>9?'':'0'}${hora}:${minuto>9?'':'0'}${minuto}:${segundo>9?'':'0'}${segundo}`;
 
             var http = new XMLHttpRequest();
-            http.open('GET', 'http://localhost:3000/api', false);
+            http.open('GET', 'http://localhost:5000/api', false);
             http.send(null);        
 			
             var obj = JSON.parse(http.responseText);
