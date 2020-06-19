@@ -205,19 +205,18 @@
     function get_data(){
         
         var http = new XMLHttpRequest();
-        http.open('GET', 'http://localhost:5000/api/luminosity', false);
+        http.open('GET', 'http://localhost:5000/api', false);
         http.send(null);        
         
         var obj = JSON.parse(http.responseText);
         if (obj.data.length == 0){
             return;
         }
-        console.log(obj)
-        
+
         var _lastIndexTemp = this.lastIndexTemp;
         this.lastIndexTemp = obj.data.length;
         listTemp = obj.data.slice(_lastIndexTemp);
-        console.log(listTemp)
+    
         listTemp.forEach(data => {
             //Máximo de 60 itens exibidos no gráfico
             if (chart.data.labels.length == 10 && chart.data.datasets[0].data.length == 10){
@@ -449,16 +448,15 @@
     this.timeLumi = 0;
 
     function get_lumi(){
-        console.warn('AAAAAAAAAA')
+
         var http = new XMLHttpRequest();
-        http.open('GET', 'http://localhost:5000/api/luminosity', false);
+        http.open('GET', 'http://localhost:3000/api/luminosity', false);
         http.send(null);        
         
         var obj = JSON.parse(http.responseText);
         if (obj.data.length == 0){
             return;
         }
-        console.log(obj)
 
         var _lastIndexTemp = this.lastIndexLumi;
         this.lastIndexLumi = obj.data.length;
@@ -536,7 +534,7 @@
             if (response.ok) {
                 response.json().then(function (novoRegistro) {
 
-                    // console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
                     
                     // tirando e colocando valores no gráfico
                     dados.labels.shift(); // apagar o primeiro
@@ -591,7 +589,7 @@
             if (response.ok) {
                 response.json().then(function (resposta) {
 
-                    // console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
 
                     resposta.reverse();
 
@@ -606,7 +604,7 @@
 
                         dados.datasets[0].data.push(registro.luminosidade);
                     }
-                    // console.log(JSON.stringify(dados));
+                    console.log(JSON.stringify(dados));
 
                     div_aguarde.style.display = 'none';
 
@@ -624,7 +622,7 @@
 
     // só altere aqui se souber o que está fazendo!
     function plotarGrafico(dados) {
-        // console.log('iniciando plotagem do gráfico...');
+        console.log('iniciando plotagem do gráfico...');
 
         var ctx = canvas_grafico.getContext('2d');
         window.grafico_linha = Chart.Line(ctx, {

@@ -22,7 +22,6 @@ router.get('/', (request, response, next) => {
 		totalHour: ArduinoDataTemp.ListHour.length,
 		averageHour: isNaN(averageHour) ? 0 : averageHour
     });
-
 });
 
 router.get('/humidity', (request, response, next) => {
@@ -74,21 +73,28 @@ router.get('/luminosity', (request, response, next) => {
         average: isNaN(average) ? 0 : average,
 		dataHour: ArduinoDataLuminosity.ListHour,
 		totalHour: ArduinoDataLuminosity.ListHour.length,
-		averageHour: isNaN(averageHour) ? 0 : averageHour
+		averageHour: isNaN(averageHour) ? 0 : "averageHour"
     });
 
 router.post('/sendData', (request, response) => {
-    temperature = ArduinoDataTemp.List[ArduinoDataTemp.List.length -1];
-    //luminosidade = ArduinoDataLuminosity.List[ArduinoDataLuminosity.List.length -1]
+    // temperature = ArduinoDataTemp.List[ArduinoDataTemp.List.length -1];
+    luminosidade = ArduinoDataLuminosity.List[ArduinoDataLuminosity.List.length -1]
+    
+    let agora = new Date();
+    let dia = new Date(agora).getDate()
+    let mes = new Date(agora).getMonth()
+    let ano = new Date(agora).getFullYear()
+    let momento = new Date(agora).getHours() + ':' + new Date(agora).getMinutes() + ':' + new Date(agora).getSeconds()
+    let data1 = ano + '-' + mes + '-' + dia
+    let sorteado = parseInt(Math.random() * 6 + (1));
 
-    var sql = "INSERT INTO medidas (type, value) VALUES ('temperatura',?)";
+    var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_setor_id,fk_sensor_id) VALUES ('${data1 + ' ' + momento}',?,${sorteado}',1)`;
 
-    db.query(sql,temperature, function(err, result) {
+    db.query(sql,luminosidade, function(err, result) {
         if (err) throw err;
         console.log("Number of records inserted: " + result.affectedRows);
       });
       
-
     response.sendStatus(200);
 })
 
