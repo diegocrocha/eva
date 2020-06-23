@@ -1,18 +1,19 @@
 module.exports = {
   development: {
-    dialect: "sqlite",
+    dialect: "mysql",
     storage: "./db.development.sqlite"
   },
   test: {
-    dialect: "sqlite",
+    dialect: "mysql",
     storage: ":memory:"
   },
   production: {
-    username: 'adminlocal',
-    password: '#Gfevasprint2',
-    database: 'bd_eva',
-    host: 'serverprojecteva.database.windows.net',
-    dialect: 'mssql',
+    username: 'root',
+    password: '',
+    database: 'eva',
+    host: 'localhost',
+    port: 3306,
+   dialect: 'mysql',
     xuse_env_variable: 'DATABASE_URL',
     dialectOptions: {
       options: {

@@ -7,34 +7,28 @@ https://codewithhugo.com/sequelize-data-types-a-practical-guide/
 
 module.exports = (sequelize, DataTypes) => {
     let Leitura = sequelize.define('Leitura',{	
-		id: {
-			field: 'id',
-			type: DataTypes.INTEGER,
-			primaryKey: true,
-			autoIncrement: true
-		},	
+			
 		temperatura: {
-			field: 'temperatura',
-			type: DataTypes.REAL,
+			field: 'registro',
+			type: DataTypes.DATE,
 			allowNull: false
 		},
 		umidade: {
-			field: 'umidade',
+			field: 'luminosidade',
 			type: DataTypes.REAL,
 			allowNull: false
 		},
 		momento: {
-			field: 'momento',
-			type: DataTypes.DATE, // NÃO existe DATETIME. O tipo DATE aqui já tem data e hora
+			field: 'fk_sensor_id',
+			type: DataTypes.INTEGER, // NÃO existe DATETIME. O tipo DATE aqui já tem data e hora
 			allowNull: false
 		},
 		momento_grafico: {
-			type: DataTypes.VIRTUAL, // campo 'falso' (não existe na tabela). Deverá ser preenchido 'manualmente' no select
-			allowNull: true
-		}
-	}, 
-	{
-		tableName: 'leitura', 
+	 		type: DataTypes.VIRTUAL, // campo 'falso' (não existe na tabela). Deverá ser preenchido 'manualmente' no select
+	 		allowNull: true
+		},
+	
+		tableName: 'tb_registro', 
 		freezeTableName: true, 
 		underscored: true,
 		timestamps: false,
