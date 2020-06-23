@@ -88,7 +88,11 @@ router.post('/sendData', (request, response) => {
     let data1 = ano + '-' + mes + '-' + dia
     let sorteado = parseInt(Math.random() * 6 + (1));
 
+<<<<<<< HEAD
+    var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES ('${data1 + ' ' + momento}',?,1)`;
+=======
     var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_setor_id,fk_sensor_id) VALUES ('${data1 + ' ' + momento}',?,${sorteado}',1)`;
+>>>>>>> 39988dc44900e811f1f0c1241e089bf1a5a06ce5
 
     db.query(sql,luminosidade, function(err, result) {
         if (err) throw err;

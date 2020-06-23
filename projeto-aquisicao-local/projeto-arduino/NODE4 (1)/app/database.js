@@ -1,3 +1,25 @@
+<<<<<<< HEAD
+
+
+
+var mysql = require('mysql');
+var connection = mysql.createConnection({
+  host: 'localhost',
+  port: '3306',
+  user: 'root',
+  password: '',
+  database: 'EVA'
+});
+
+connection.connect(function (err) {
+  if (err) throw err;
+  console.log('Conectado com sucesso!')
+});
+
+
+
+module.exports = connection;
+=======
 module.exports = {
     development: {
       dialect: "sqlite",
@@ -48,3 +70,4 @@ module.exports = {
 
 
 // module.exports = connection;
+>>>>>>> 39988dc44900e811f1f0c1241e089bf1a5a06ce5
