@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" href="logo.png" type="image/png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/stylesheets/style-2.css">
+    
+</head>
+<body class="body_c">
+   
+    <a href="index.html" class="return"><img src="home.png">Home</a>
+    
+
+    <div class="container">
+        <img src="logo2.png">
+        
+        <div class="box_cadastro" id="box_login">
+            
+            <h2>Sign In:</h2>
+            <form id="form_login" method="post" onsubmit="return entrar()">
+                <input class="input_u" type="text" placeholder="Username ou E-mail" name="login">           
+                <input class="input_u" type="password" placeholder="Senha" name="senha">
+        
+                <button id="btn_entrar">Entrar</button>
+
+            </form>
+               
+            
+
+            <input class="check" type="checkbox"> Lembrar-se 
+
+            <a href="" class="forgot_pass">Esqueceu senha?</a>
+
+
+
+        </div>
+
+        
+        <div class="register">
+                Não tem uma conta? <a href="cadastro.html">REGISTRE-SE AQUI</a> 
+        </div>  
+        
+        <img src="aguarde.gif" id="img_aguarde" style="display: none;">
+    
+        <div id="div_erro" style="background-color: sandybrown; color: maroon; display: none;">
+        
+    </div>
+
+
+
+
+
+
+</body>
+</html>
+
+<script>
+
+    function entrar() {
+        aguardar();
+        var formulario = new URLSearchParams(new FormData(form_login));
+        fetch("/usuarios/autenticar", {
+            method: "POST",
+            body: formulario
+        }).then(resposta => {
+            
+            if (resposta.ok) {
+
+                resposta.json().then(json => {
+
+                    sessionStorage.login_usuario_meuapp = json.email;
+                    sessionStorage.nome_usuario_meuapp = json.email;
+                    
+                    window.location.href = 'teste_dash.html';
+                });
+
+            } else {
+
+                console.log('Erro de login!');
+
+                response.text().then(texto => {
+                    console.error(texto);
+                    finalizar_aguardar(texto);
+                });
+            }
+        });
+
+        return false;
+    }
+
+    function aguardar() {
+        btn_entrar.disabled = true;
+        img_aguarde.style.display = 'block';
+        div_erro.style.display = 'none';
+    }
+
+    function finalizar_aguardar(resposta) {
+        btn_entrar.disabled = false;
+        img_aguarde.style.display= 'none';
+        div_erro.style.display = 'block';
+        div_erro.innerHTML = resposta;
+    }
+
+</script>

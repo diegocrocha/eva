@@ -49,10 +49,15 @@ create table tb_sensor(
 create table tb_registro(
 	registro datetime primary key,
 	luminosidade double(10,2),
+    luminosidade double(10,2),
+    luminosidade double(10,2),
 	fk_setor_id int
 );
 
 -- ------------------------------------------------------------- INSERTS ------------------------------------------------------------- --
 
+insert into tb_acesso values 
+	(null, 'admin','admin',null)
+;
 
 
