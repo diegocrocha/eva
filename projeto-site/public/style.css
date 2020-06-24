@@ -1,0 +1,94 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+.container{
+    width: 100vw;
+    height: 100vh;
+}
+.container-content{
+    width: 50vw;
+    height: 50vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    grid-template-areas: 'setor1 setor2 setor3 setor4 setor5 setor6'
+                         'setor7 setor8 setor8 setor9 setor9 setor10'
+                         'setor11 setor12 setor12 setor13 setor13 setor14'
+    ;
+}
+.setor{
+    display: flex;
+    width: 100%;
+    height: 100%;
+    border: solid 2px black;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.setor i{
+    margin: 2px;
+    color: blue;
+}
+.popup{
+    position: fixed;
+    top: 17.5vh;
+    left: 25vw;
+    width: 50vw;
+    height: 65vh;
+
+    background: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0px 0px 50px 1px rgba(0, 0, 0, 0.5);
+}
+.popup b{
+    color: #cccccc;
+    font-size: 1.5em;
+    position: absolute;
+    right: 5px;
+    top: 0px;
+    cursor: pointer;
+}
+#set1{
+    grid-area: setor1;
+}
+#set2{
+    grid-area: setor2;
+}
+#set3{
+    grid-area: setor3;
+}
+#set4{
+    grid-area: setor4;
+}
+#set5{
+    grid-area: setor5;
+}
+#set6{
+    grid-area: setor6;
+}
+#set7{
+    grid-area: setor7;
+}
+#set8{
+    grid-area: setor8;
+}
+#set9{
+    grid-area: setor9;
+}
+#set10{
+    grid-area: setor10;
+}
+#set11{
+    grid-area: setor11;
+}
+#set12{
+    grid-area: setor12;
+}
+#set13{
+    grid-area: setor13;
+}
+#set14{
+    grid-area: setor14;
+}
