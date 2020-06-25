@@ -14,8 +14,7 @@
     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     grid-template-areas: 'setor1 setor2 setor3 setor4 setor5 setor6'
-                         'setor7 setor8 setor8 setor9 setor9 setor10'
-                         'setor11 setor12 setor12 setor13 setor13 setor14'
+                         'setor7 setor8 setor9 setor10 setor11 setor12'
     ;
 }
 .setor{

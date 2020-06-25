@@ -117,7 +117,8 @@ router.get('/luminosity', (request, response, next) => {
         luminosidade1 = ArduinoDataLuminosity1.List[ArduinoDataLuminosity1.List.length - 1]
         luminosidade2 = ArduinoDataLuminosity2.List[ArduinoDataLuminosity2.List.length - 1]
 
-        let sorteado = parseInt(Math.random() * 3)
+        let sorteado = parseInt(Math.random() * 10)
+
         const registros_mantidos_tabela_leitura = 8;
 
         if (sorteado == 0) {
@@ -126,18 +127,30 @@ router.get('/luminosity', (request, response, next) => {
         else if (sorteado == 1) {
             var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES (CONVERT(Datetime, '${agora()}', 120),${luminosidade1},2);`
         }
-        else {
-            var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES (CONVERT(Datetime, '${agora()}', 120),${luminosidade2},3);`
+        else if (sorteado == 2) {
+            var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES (CONVERT(Datetime, '${agora()}', 120),${luminosidade1},3);`
+        }
+        else if (sorteado == 3) {
+            var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES (CONVERT(Datetime, '${agora()}', 120),${luminosidade},4);`
+        }
+        else if (sorteado == 4) {
+            var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES (CONVERT(Datetime, '${agora()}', 120),${luminosidade},5);`
+        }
+        else if (sorteado == 5) {
+            var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES (CONVERT(Datetime, '${agora()}', 120),${luminosidade},6);`
+        }
+        else{
+            var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES (CONVERT(Datetime, '${agora()}', 120),${luminosidade2},7);`
         }
 
         db.conectar().then(() => {
 
             return db.sql.query(`
             
-            ${sql}
+            ${sql}`)
             
-            delete from tb_registro where registro not in 
-            (select top ${registros_mantidos_tabela_leitura} registro from tb_registro order by registro desc);`)
+            // delete from tb_registro where registro not in 
+            // (select top ${registros_mantidos_tabela_leitura} registro from tb_registro order by registro desc);`
     
             .then(() => {
                 console.log('Registro inserido com sucesso!');

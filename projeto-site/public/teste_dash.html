@@ -19,40 +19,14 @@
     <div class="container">
         <h3 id="b_usuario"></h3>
         <div id="div_aguarde"></div>
-        <div class="container-content">
-            <div onclick="openGraph(this)" id="set1" class="setor">setor 1</div>
-            <div onclick="openGraph(this)" id="set2" class="setor">setor 2</div>
-            <div onclick="openGraph(this)" id="set3" class="setor">setor 3</div>
-            <div onclick="openGraph(this)" id="set4" class="setor">setor 4</div>
-            <div onclick="openGraph(this)" id="set5" class="setor">setor 5</div>
-            <div onclick="openGraph(this)" id="set6" class="setor">setor 6</div>
-            <div onclick="openGraph(this)" id="set7" class="setor">setor 7</div>
-            <div onclick="openGraph(this)" id="set8" class="setor">setor 8</div>
-            <div onclick="openGraph(this)" id="set9" class="setor">setor 9</div>
-            <div onclick="openGraph(this)" id="set10" class="setor">setor 10</div>
-            <div onclick="openGraph(this)" id="set11" class="setor">setor 11</div>
-            <div onclick="openGraph(this)" id="set12" class="setor">setor 12</div>
-            <div onclick="openGraph(this)" id="set13" class="setor">setor 13</div>
-            <div onclick="openGraph(this)" id="set14" class="setor">setor 14</div>
+        <div class="container-content" id="div_setores">
         </div>
 
 
-        <div id="popup1" class="popup" style="border: solid 2px rgb(52, 152, 219); display: none;"><b
+        <div id="popup" class="popup" style="border: solid 2px; display: none;"><b
                 onclick="closeGraph()">X</b>
             <section style="width:100%">
-                <canvas id="canvas_grafico0"></canvas>
-                <section>
-        </div>
-        <div id="popup2" class="popup" style="border: solid 2px rgb(46, 204, 113); display: none;"><b
-                onclick="closeGraph()">X</b>
-            <section style="width:100%">
-                <canvas id="canvas_grafico1"></canvas>
-                <section>
-        </div>
-        <div id="popup3" class="popup" style="border: solid 2px rgb(231, 76, 60); display: none;"><b
-                onclick="closeGraph()">X</b>
-            <section style="width:100%">
-                <canvas id="canvas_grafico2"></canvas>
+                <canvas id="canvas_grafico"></canvas>
                 <section>
         </div>
 
@@ -63,46 +37,63 @@
 </html>
 <script>
 
-    for (let i = 1; i < 15; i++) {
-        let situação = parseInt(Math.random() * 4)
+    verificar_autenticacao();
 
-        if (situação == 1) {
-            document.getElementById(`set${i}`).style.backgroundColor = "rgb(52, 152, 219)"
-        }
-        else if (situação == 2) {
-            document.getElementById(`set${i}`).style.backgroundColor = "rgb(46, 204, 113)"
-        }
-        else {
-            document.getElementById(`set${i}`).style.backgroundColor = "rgb(231, 76, 60)"
-        }
+    window.onload = iniciarGraficos();
+
+    function iniciarGraficos() {
+        obterSetores();
+       // obterDadosGraficos();
     }
 
-    function openGraph(obj) {
+    function obterSetores() {
+        fetch('/leituras/estatisticas', { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (json) {
 
-        let bgColor = obj.style.backgroundColor;
-        if (bgColor == "rgb(52, 152, 219)") {
-            popup1.style.display = "block"
-        }
-        else if (bgColor == "rgb(46, 204, 113)") {
-            popup2.style.display = "block"
-        }
-        else {
-            popup3.style.display = "block"
-        }
+                    console.log(`Dados recebido para as caixinhas: ${JSON.stringify(json)}`);
+                    div_setores.innerHTML = '';
+                    json.forEach((item,i) => {
+                        let cor;
+                        if (item.media < 300) {
+                            cor = 'rgb(52, 152, 219)';
+                        } else if (item.media < 600) {
+                            cor = 'rgb(46, 204, 113)';
+                        } else {
+                            cor = 'rgb(231, 76, 60)';
+                        }
+
+                        div_setores.innerHTML += `
+                        <div onclick="openGraph(${item.fk_sensor_id}, '${cor}')" id="set${i+1}" class="setor" title="Média: ${item.media}">
+                        Sensor ${item.fk_sensor_id}
+                        </div>`;
+
+                        document.getElementById(`set${i+1}`).style.backgroundColor = cor;
+                    });
+
+                    setTimeout(obterSetores, 10000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                setTimeout(atualizarGrafico, 5000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function openGraph(sensor, cor) {
+        popup.style.display = "block";
+        popup.style.borderColor = cor;
+        obterDadosGrafico(sensor);
     }
 
     function closeGraph() {
-        popup1.style.display = "none"
-        popup2.style.display = "none"
-        popup3.style.display = "none"
+        popup.style.display = "none";
+        clearTimeout(timer);
     }
 
-    window.onload = obterDadosGrafico0;
-    window.onload = obterDadosGrafico1;
-    window.onload = obterDadosGrafico2;
-
-
-    verificar_autenticacao();
 
     // neste JSON tem que ser 'labels', 'datasets' etc, 
     // porque é o padrão do Chart.js
@@ -121,58 +112,34 @@
         ]
     };
 
-    var dados1 = {
-        labels: [],
-        datasets: [
-            {
-                yAxisID: 'y-luminosidade',
-                label: 'Luminosidade',
-                borderColor: '#3498db',
-                backgroundColor: '#3498db',
-                fill: false,
-                data: []
-            }
-
-        ]
-    };
-    var dados2 = {
-        labels: [],
-        datasets: [
-            {
-                yAxisID: 'y-luminosidade',
-                label: 'Luminosidade',
-                borderColor: '#e74c3c',
-                backgroundColor: '#e74c3c',
-                fill: false,
-                data: []
-            }
-
-        ]
-    };
-
 
     // só mexer se quiser alterar o tempo de atualização
     // ou se souber o que está fazendo!
-    function atualizarGrafico() {
+    function atualizarGrafico(sensor) {
 
-        fetch('/leituras/tempo-real', { cache: 'no-store' }).then(function (response) {
+        if (popup.style.display == 'none') {
+            clearTimeout(timer);
+            return;
+        }
+
+        fetch(`/leituras/tempo-real/${sensor}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (novoRegistro) {
 
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados recebidos do sensor ${sensor}: ${JSON.stringify(novoRegistro)}`);
 
                     // tirando e colocando valores no gráfico
                     dados.labels.shift(); // apagar o primeiro
-                    dados.labels.push(novoRegistro.registro); // incluir um novo momento
+                    dados.labels.push(novoRegistro.momento_grafico); // incluir um novo momento
                     dados.datasets[0].data.shift();  // apagar o primeiro de temperatura
                     dados.datasets[0].data.push(novoRegistro.luminosidade); // incluir uma nova leitura de temperatura
                     window.grafico_linha.update();
 
-                    setTimeout(atualizarGrafico, 5000);
+                    timer = setTimeout(()=>{atualizarGrafico(sensor)}, 5000);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
-                setTimeout(atualizarGrafico, 5000);
+                setTimeout(()=>{atualizarGrafico(sensor)}, 5000);
             }
         })
             .catch(function (error) {
@@ -181,58 +148,7 @@
     }
     //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
-    function atualizarGrafico1() {
-        fetch('/leituras/tempo-real1', { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (novoRegistro) {
-
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-
-                    // tirando e colocando valores no gráfico
-                    dados1.labels.shift(); // apagar o primeiro
-                    dados1.labels.push(novoRegistro.registro); // incluir um novo momento
-                    dados1.datasets[0].data.shift();  // apagar o primeiro de temperatura
-                    dados1.datasets[0].data.push(novoRegistro.luminosidade); // incluir uma nova leitura de temperatura
-                    window.grafico_linha.update();
-
-                    setTimeout(atualizarGrafico1, 5000);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-                setTimeout(atualizarGrafico1, 5000);
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-    }
-    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-    function atualizarGrafico2() {
-        fetch('/leituras/tempo-real2', { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (novoRegistro) {
-
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-
-                    // tirando e colocando valores no gráfico
-                    dados2.labels.shift(); // apagar o primeiro
-                    dados2.labels.push(novoRegistro.registro); // incluir um novo momento
-                    dados2.datasets[0].data.shift();  // apagar o primeiro de temperatura
-                    dados2.datasets[0].data.push(novoRegistro.luminosidade); // incluir uma nova leitura de temperatura
-                    window.grafico_linha.update();
-
-                    setTimeout(atualizarGrafico2, 5000);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-                setTimeout(atualizarGrafico2, 5000);
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-
-    }
+   
     // altere aqui as configurações do gráfico
     // (tamanhos, cores, textos, etc)
     function configurarGrafico() {
@@ -262,15 +178,18 @@
     // ================================================================================
     // altere aqui como os dados serão exibidos
     // e como são recuperados do BackEnd
-    function obterDadosGrafico0() {
+    function obterDadosGrafico(sensor) {
 
-        fetch('/leituras/ultimas', { cache: 'no-store' }).then(function (response) {
+        fetch(`/leituras/ultimas/${sensor}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
 
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    console.log(`Dados recebidos do sensor ${sensor}: ${JSON.stringify(resposta)}`);
 
                     resposta.reverse();
+
+                    dados.labels = [];
+                    dados.datasets[0].data = [];
 
                     for (i = 0; i < resposta.length; i++) {
                         var registro = resposta[i];
@@ -283,11 +202,9 @@
 
                         dados.datasets[0].data.push(registro.luminosidade);
                     }
-                    console.log(JSON.stringify(dados));
+                    
 
-                    div_aguarde.style.display = 'none';
-
-                    plotarGrafico(dados);
+                    plotarGrafico(sensor);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -298,112 +215,20 @@
             });
 
     }
-    // ================================================================================
-    // altere aqui como os dados serão exibidos
-    // e como são recuperados do BackEnd
-    function obterDadosGrafico1() {
-
-        fetch('/leituras/ultimas1', { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-
-                    resposta.reverse();
-
-                    for (i = 0; i < resposta.length; i++) {
-                        var registro = resposta[i];
-
-                        // aqui, após 'registro.' use os nomes 
-                        // dos atributos que vem no JSON 
-                        // que gerou na consulta ao banco de dados
-
-                        dados1.labels.push(registro.momento_grafico);
-
-                        dados1.datasets[0].data.push(registro.luminosidade);
-                    }
-                    console.log(JSON.stringify(dados1));
-
-                    div_aguarde.style.display = 'none';
-
-                    plotarGrafico(dados1);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-
-    }
-    // ================================================================================
-    // altere aqui como os dados serão exibidos
-    // e como são recuperados do BackEnd
-    function obterDadosGrafico2() {
-
-        fetch('/leituras/ultimas2', { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-
-                    resposta.reverse();
-
-                    for (i = 0; i < resposta.length; i++) {
-                        var registro = resposta[i];
-
-                        // aqui, após 'registro.' use os nomes 
-                        // dos atributos que vem no JSON 
-                        // que gerou na consulta ao banco de dados
-
-                        dados2.labels.push(registro.momento_grafico);
-
-                        dados2.datasets[0].data.push(registro.luminosidade);
-                    }
-                    console.log(JSON.stringify(dados2));
-
-                    div_aguarde.style.display = 'none';
-
-                    plotarGrafico(dados2);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-
-    }
+    
     // ================================================================================
     // só altere aqui se souber o que está fazendo!
-    function plotarGrafico(dados) {
+    function plotarGrafico(sensor) {
         console.log('iniciando plotagem do gráfico...');
-        let canvas_grafico0 = document.getElementById('canvas_grafico0');
-        var ctx = canvas_grafico0.getContext('2d');
+        let canvas_grafico = document.getElementById('canvas_grafico');
+        var ctx = canvas_grafico.getContext('2d');
         window.grafico_linha = Chart.Line(ctx, {
             data: dados,
             options: configurarGrafico()
         });
-        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        let canvas_grafico1 = document.getElementById('canvas_grafico1');
-        var ctx = canvas_grafico1.getContext('2d');
-        window.grafico_linha = Chart.Line(ctx, {
-            data: dados1,
-            options: configurarGrafico()
-        });
-        // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-        let canvas_grafico2 = document.getElementById('canvas_grafico2');
-        var ctx = canvas_grafico2.getContext('2d');
-        window.grafico_linha = Chart.Line(ctx, {
-            data: dados2,
-            options: configurarGrafico()
-        });
-
-        setTimeout(atualizarGrafico, 5000);
-        setTimeout(atualizarGrafico1, 5000);
-        setTimeout(atualizarGrafico2, 5000);
+       
+            // arrow function
+        setTimeout(()=>{atualizarGrafico(sensor)}, 5000);
     }
 
 

@@ -5,39 +5,40 @@ var Leitura = require('../models').Leitura;
 
 // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
 /* Recuperar as últimas N leituras */
-router.get('/ultimas', function(req, res, next) {
-	
+router.get('/ultimas/:sensor', function (req, res, next) {
+
 	// quantas são as últimas leituras que quer? 8 está bom?
 	const limite_linhas = 7;
 
 	console.log(`Recuperando as últimas ${limite_linhas} leituras`);
-	
-	const instrucaoSql = `select top ${limite_linhas} registro,luminosidade, fk_sensor_id,FORMAT(registro,'HH:mm:ss') as momento_grafico from tb_registro 
-	order by registro desc`;
+
+	const instrucaoSql = `
+	select top ${limite_linhas} registro,
+	luminosidade, fk_sensor_id,FORMAT(registro,'HH:mm:ss') as momento_grafico from tb_registro where fk_sensor_id = ${req.params.sensor} 
+	order by registro desc
+	`;
 
 	sequelize.query(instrucaoSql, {
 		model: Leitura,
-		mapToModel: true 
-	  })
-	  .then(resultado => {
+		mapToModel: true
+	})
+		.then(resultado => {
 			console.log(`Encontrados: ${resultado.length}`);
 			res.json(resultado);
-	  }).catch(erro => {
+		}).catch(erro => {
 			console.error(erro);
 			res.status(500).send(erro.message);
-	  });
+		});
 });
 
 
 // tempo real (último valor de cada leitura)
-router.get('/tempo-real', function (req, res, next) {
-	
+router.get('/tempo-real/:sensor', function (req, res, next) {
+
 	console.log(`Recuperando a última leitura`);
 
-	
-
 	const instrucaoSql = `select top 1 registro,luminosidade,fk_sensor_id, FORMAT(registro,'HH:mm:ss') as momento_grafico  
-						from tb_registro where fk_sensor_id = 1 order by registro desc `;
+						from tb_registro where fk_sensor_id = ${req.params.sensor} order by registro desc `;
 
 	sequelize.query(instrucaoSql, { type: sequelize.QueryTypes.SELECT })
 		.then(resultado => {
@@ -46,122 +47,29 @@ router.get('/tempo-real', function (req, res, next) {
 			console.error(erro);
 			res.status(500).send(erro.message);
 		});
-  
-});
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-/* Recuperar as últimas N leituras */
-router.get('/ultimas1', function(req, res, next) {
-	
-	// quantas são as últimas leituras que quer? 8 está bom?
-	const limite_linhas = 7;
 
-	console.log(`Recuperando as últimas ${limite_linhas} leituras`);
-	
-	const instrucaoSql = `select top ${limite_linhas} registro,luminosidade, fk_sensor_id,FORMAT(registro,'HH:mm:ss') as momento_grafico from tb_registro where fk_sensor_id = 2 
-	order by registro desc`;
-
-	sequelize.query(instrucaoSql, {
-		model: Leitura,
-		mapToModel: true 
-	  })
-	  .then(resultado => {
-			console.log(`Encontrados: ${resultado.length}`);
-			res.json(resultado);
-	  }).catch(erro => {
-			console.error(erro);
-			res.status(500).send(erro.message);
-	  });
-});
-
-
-// tempo real (último valor de cada leitura)
-router.get('/tempo-real1', function (req, res, next) {
-	
-	console.log(`Recuperando a última leitura`);
-
-	
-
-	const instrucaoSql = `select top 1 registro,luminosidade,fk_sensor_id, FORMAT(registro,'HH:mm:ss') as momento_grafico  
-						from tb_registro where fk_sensor_id = 2 order by registro desc`;
-
-	sequelize.query(instrucaoSql, { type: sequelize.QueryTypes.SELECT })
-		.then(resultado => {
-			res.json(resultado[0]);
-		}).catch(erro => {
-			console.error(erro);
-			res.status(500).send(erro.message);
-		});
-  
-});
-// >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
-/* Recuperar as últimas N leituras */
-router.get('/ultimas2', function(req, res, next) {
-	
-	// quantas são as últimas leituras que quer? 8 está bom?
-	const limite_linhas = 7;
-
-	console.log(`Recuperando as últimas ${limite_linhas} leituras`);
-	
-	const instrucaoSql = `select top ${limite_linhas} registro,luminosidade, fk_sensor_id,FORMAT(registro,'HH:mm:ss') as momento_grafico from tb_registro where fk_sensor_id = 3 
-	order by registro desc`;
-
-	sequelize.query(instrucaoSql, {
-		model: Leitura,
-		mapToModel: true 
-	  })
-	  .then(resultado => {
-			console.log(`Encontrados: ${resultado.length}`);
-			res.json(resultado);
-	  }).catch(erro => {
-			console.error(erro);
-			res.status(500).send(erro.message);
-	  });
-});
-
-
-// tempo real (último valor de cada leitura)
-router.get('/tempo-real2', function (req, res, next) {
-	
-	console.log(`Recuperando a última leitura`);
-
-	
-
-	const instrucaoSql = `select top 1 registro,luminosidade,fk_sensor_id, FORMAT(registro,'HH:mm:ss') as momento_grafico  
-						from tb_registro where fk_sensor_id = 3 order by registro desc `;
-
-	sequelize.query(instrucaoSql, { type: sequelize.QueryTypes.SELECT })
-		.then(resultado => {
-			res.json(resultado[0]);
-		}).catch(erro => {
-			console.error(erro);
-			res.status(500).send(erro.message);
-		});
-  
 });
 
 
 // estatísticas (max, min, média, mediana, quartis etc)
 router.get('/estatisticas', function (req, res, next) {
-	
+
 	console.log(`Recuperando as estatísticas atuais`);
 
-	const instrucaoSql = `select 
-							max(temperatura) as temp_maxima, 
-							min(temperatura) as temp_minima, 
-							avg(temperatura) as temp_media,
-							max(umidade) as umidade_maxima, 
-							min(umidade) as umidade_minima, 
-							avg(umidade) as umidade_media 
-						from leitura`;
+	const momento = new Date(new Date() - 1000*60*60);
+	const uma_hora_atras = `${momento.getFullYear()}-${momento.getMonth()+1}-${momento.getDate()} ${momento.getHours()}:${momento.getMinutes()}:00`
+	const instrucaoSql = `select fk_sensor_id, avg(luminosidade) as media 
+						from tb_registro where registro >= '${uma_hora_atras}'
+						group by fk_sensor_id`;
 
 	sequelize.query(instrucaoSql, { type: sequelize.QueryTypes.SELECT })
 		.then(resultado => {
-			res.json(resultado[0]);
+			res.json(resultado);
 		}).catch(erro => {
 			console.error(erro);
 			res.status(500).send(erro.message);
 		});
-  
+
 });
 
 
