@@ -112,8 +112,8 @@
             {
                 yAxisID: 'y-luminosidade',
                 label: 'Luminosidade',
-                borderColor: window.chartColors.red,
-                backgroundColor: window.chartColors.red,
+                borderColor: '#2ecc71',
+                backgroundColor: '#2ecc71',
                 fill: false,
                 data: []
             }
@@ -127,8 +127,8 @@
             {
                 yAxisID: 'y-luminosidade',
                 label: 'Luminosidade',
-                borderColor: window.chartColors.red,
-                backgroundColor: window.chartColors.red,
+                borderColor: '#3498db',
+                backgroundColor: '#3498db',
                 fill: false,
                 data: []
             }
@@ -141,8 +141,8 @@
             {
                 yAxisID: 'y-luminosidade',
                 label: 'Luminosidade',
-                borderColor: window.chartColors.red,
-                backgroundColor: window.chartColors.red,
+                borderColor: '#e74c3c',
+                backgroundColor: '#e74c3c',
                 fill: false,
                 data: []
             }
@@ -178,7 +178,10 @@
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
-        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    }
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+
+    function atualizarGrafico1() {
         fetch('/leituras/tempo-real1', { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (novoRegistro) {
@@ -192,17 +195,19 @@
                     dados1.datasets[0].data.push(novoRegistro.luminosidade); // incluir uma nova leitura de temperatura
                     window.grafico_linha.update();
 
-                    setTimeout(atualizarGrafico, 5000);
+                    setTimeout(atualizarGrafico1, 5000);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
-                setTimeout(atualizarGrafico, 5000);
+                setTimeout(atualizarGrafico1, 5000);
             }
         })
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
-        //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    }
+    //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+    function atualizarGrafico2() {
         fetch('/leituras/tempo-real2', { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (novoRegistro) {
@@ -216,18 +221,18 @@
                     dados2.datasets[0].data.push(novoRegistro.luminosidade); // incluir uma nova leitura de temperatura
                     window.grafico_linha.update();
 
-                    setTimeout(atualizarGrafico, 5000);
+                    setTimeout(atualizarGrafico2, 5000);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
-                setTimeout(atualizarGrafico, 5000);
+                setTimeout(atualizarGrafico2, 5000);
             }
         })
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
-    }
 
+    }
     // altere aqui as configurações do gráfico
     // (tamanhos, cores, textos, etc)
     function configurarGrafico() {
@@ -313,15 +318,15 @@
                         // dos atributos que vem no JSON 
                         // que gerou na consulta ao banco de dados
 
-                        dados.labels.push(registro.momento_grafico);
+                        dados1.labels.push(registro.momento_grafico);
 
-                        dados.datasets[0].data.push(registro.luminosidade);
+                        dados1.datasets[0].data.push(registro.luminosidade);
                     }
-                    console.log(JSON.stringify(dados));
+                    console.log(JSON.stringify(dados1));
 
                     div_aguarde.style.display = 'none';
 
-                    plotarGrafico(dados);
+                    plotarGrafico(dados1);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -352,15 +357,15 @@
                         // dos atributos que vem no JSON 
                         // que gerou na consulta ao banco de dados
 
-                        dados.labels.push(registro.momento_grafico);
+                        dados2.labels.push(registro.momento_grafico);
 
-                        dados.datasets[0].data.push(registro.luminosidade);
+                        dados2.datasets[0].data.push(registro.luminosidade);
                     }
-                    console.log(JSON.stringify(dados));
+                    console.log(JSON.stringify(dados2));
 
                     div_aguarde.style.display = 'none';
 
-                    plotarGrafico(dados);
+                    plotarGrafico(dados2);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -385,18 +390,20 @@
         let canvas_grafico1 = document.getElementById('canvas_grafico1');
         var ctx = canvas_grafico1.getContext('2d');
         window.grafico_linha = Chart.Line(ctx, {
-            data: dados,
+            data: dados1,
             options: configurarGrafico()
         });
         // >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>
         let canvas_grafico2 = document.getElementById('canvas_grafico2');
         var ctx = canvas_grafico2.getContext('2d');
         window.grafico_linha = Chart.Line(ctx, {
-            data: dados,
+            data: dados2,
             options: configurarGrafico()
         });
 
         setTimeout(atualizarGrafico, 5000);
+        setTimeout(atualizarGrafico1, 5000);
+        setTimeout(atualizarGrafico2, 5000);
     }
 
 

@@ -20,9 +20,25 @@ function trc5000() {
     }
 }
 
-function ldr(){
+function ldr(){//verde
+    min = 300;
+    max = 600;
+
+    let random = Math.floor(Math.random()*(max-min+1)+min);
+
+    return random
+}
+function ldr1(){//azul
     min = 0;
-    max = 1023
+    max = 299;
+
+    let random = Math.floor(Math.random()*(max-min+1)+min);
+
+    return random
+}
+function ldr2(){//vermelho
+    min = 601;
+    max = 1023;
 
     let random = Math.floor(Math.random()*(max-min+1)+min);
 
@@ -60,4 +76,4 @@ function dht11(options){
 }
 
 
-module.exports = {lm35, trc5000, ldr, dht11};
+module.exports = {lm35, trc5000,ldr,ldr1,ldr2, dht11};
