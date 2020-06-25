@@ -1,48 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <link rel="icon" href="logo.png" type="image/png">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cadastro</title>
     <link rel="stylesheet" href="/stylesheets/style-2.css">
-    
+
 </head>
+
 <body class="body_c">
-   
+
     <a href="index.html" class="return"><img src="home.png">Home</a>
-    
+
 
     <div class="container">
         <img src="logo2.png">
-        
-        <div class="box_cadastro">
-            
-            <h2>Sign In:</h2>
-            <input class="input_u" type="text" placeholder="Nome *">  
-            <input class="input_u" type="text" placeholder="E-mail *">     
-            <input class="input_u" type="text" placeholder="Telefone *">    
-            <input class="input_u" type="text" placeholder="Empresa"> 
-            <input class="input_u" type="text" placeholder="CNPJ">     
-            <input class="input_u2" type="text" placeholder="CEP">
-            <input class="input_u2" type="text" placeholder="Número">
-            <input class="input_u2" type="text" placeholder="Complemento">               
-            <input class="input_u" type="text" placeholder="Username *">        
-            <input class="input_u" type="password" placeholder="Senha *">
-            <input class="input_u" type="password" placeholder="Confirmar senha *">
-            
-            <button>Registrar</button> <br>
 
+        <div class="box_cadastro">
+
+            <h2>Sign In:</h2>
+            <form id="form_cadastro" method="post" onsubmit="return cadastrar()">
+                <input id="i1" name="nome" class="input_u" type="text" placeholder="Nome *">
+                <input id="i2" name="login" class="input_u" type="text" placeholder="E-mail *">
+                <input id="i3" name="telefone" class="input_u" type="text" placeholder="Telefone *">
+                <input id="i4" name="empresa" class="input_u" type="text" placeholder="Empresa">
+                <input id="i5" name="cnpj" class="input_u" type="text" placeholder="CNPJ">
+                <input id="i6" name="cep" class="input_u2" type="text" placeholder="CEP">
+                <input id="i7" name="numero" class="input_u2" type="text" placeholder="Número">
+                <input id="i8" name="complemento" class="input_u2" type="text" placeholder="Complemento">
+                <input id="i9" name="senha" class="input_u" type="password" placeholder="Senha *">
+                <input id="i10" name="" class="input_u" type="password" placeholder="Confirmar senha *">
+
+                <button id="btn_entrar" style="display: none;">Registrar</button> <br>
+            </form>
+                <button id="btn_verificar" onclick="validacadastro()">Verificar</button>
+
+            <div id="loading"><img src="aguarde2.gif" id="img_aguarde" style="display: none;" width="100px"></div>
+
+            <div id="div_erro" style="background-color: sandybrown; color: maroon; display: none;">
+
+            </div>
+
+            <div class="register">
+                <a href="login.html"> Já tem conta? Faça seu login</a>
+            </div>
 
         </div>
-        
-         <div class="register">
-               <a href="login.html"> Já tem conta? Faça seu login</a> 
-        </div>   
-        
-    </div>
 
 
 
 </body>
+
 </html>
+<script>
+
+    function validacadastro() {
+
+        var erros = [];
+
+        if (!i1.value) {
+            erros.push("Preencha com o seu nome")
+        }
+
+        if ((i3.value.search("-") == -1) ||
+            (i3.value[i3.value.length - 5]) != "-") {
+            erros.push("O formato do telefone é: (XX) XXXX-XXXX")
+        }
+
+        if ((i5.value.search(".") == -1)||
+            (i5.value.search("-") == -1)||
+            (i5.value.search("/") == -1)||
+            (i5.value.search(" ") >= 1)) {
+            erros.push("O formato do CPF é: XX.XXX.XXX/XXXX-XX")
+        }
+
+        if ((i2.value.search("@") == -1)||
+            (i2.value.search(".") == -1)||
+            (i2.value.search(" ") >= 1)) {
+            erros.push("O formato do e-mail é: usuário@domínio.com.br")
+        }
+
+        if ((i6.value.search("-") == -1)||
+            (i6.value.search(" ") >= 1)) {
+            erros.push("O formato do CEP é: XXXXX-XXX")
+        }
+
+        if (!i7.value) {
+            erros.push("Preencha com o número do seu endereço")
+        }
+
+        if (!i9.value) {
+            erros.push("Preencha com a senha que desejar")
+        }
+        if(i9.value !== i10.value){
+            erros.push("Confirmação e senha não batem")
+        }
+        div_erro.style.display = ""
+        div_erro.innerHTML = erros;
+
+        if(erros.length <= 0){
+            div_erro.innerHTML = "";
+            document.getElementById("btn_entrar").style.display = ""
+            document.getElementById("btn_verificar").style.display = "none"
+        }
+    }
+    function cadastrar() {
+        aguardar();
+        var formulario = new URLSearchParams(new FormData(form_cadastro));
+        fetch("/usuarios/cadastrar", {
+            method: "POST",
+            body: formulario
+        }).then(function (response) {
+
+            if (response.ok) {
+
+                window.location.href = 'login.html';
+
+            } else {
+
+                console.log('Erro de cadastro!');
+                response.text().then(function (resposta) {
+                    div_erro.innerHTML = resposta;
+                });
+                finalizar_aguardar();
+            }
+        });
+
+        return false;
+    }
+
+    function aguardar() {
+        btn_entrar.disabled = true;
+        img_aguarde.style.display = '';
+        div_erro.style.display = 'none';
+    }
+
+    function finalizar_aguardar() {
+        btn_entrar.disabled = false;
+        img_aguarde.style.display = 'none';
+        div_erro.style.display = 'block';
+    }
+</script>
