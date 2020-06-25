@@ -480,113 +480,66 @@ body{
 
     /* ==>DashBoard Page <== */
 
-    .container-forte{
-        display: flex;
-        width: 100vw;
-        height: 100vh;
-    }
+   .side-bar{
+       width: 15vw;
+       height: 100vh;
+       background-color: #86C232;
+       float: left;
+   }
+   .side-bar ul{
+       list-style: none;
+       padding: 0px;
+   }
+   .side-bar ul li{
 
-    .header-dash{
-        padding: 0 25px;
-        height: 8vh;
-        background: rgba(0, 0, 0, 0.71);
-        display: flex;
-        align-items: center;
-    }
+        padding: 5px;
+        transition: 0.5s;
+   }
+   .side-bar ul li:hover{
+        cursor: pointer;
+        color: rgba(0,0,0,0.7);
+   }
 
-    .logo-dash{
-        margin-left: 42%;
-        width: 100px;
-        display: flex;
+   .side-bar ul li img{
+        width: 80px;
+   }
+   .side-bar ul li a{
+    color: #fff;
     }
-
-    .logo-dash img {
-        width: 25px;
-    }
-
-    .profile-menu{
-        padding: 4vh;
-        margin: 0;
-        height: 100vh;
-        overflow: hidden;
-
-        background: #222629;
-        color: #6b6e70;
-    }
-    .profile-menu ul{
-        float: left;
-        margin: 0;
-        margin-top: 3vh;
-        padding: 0;
-        list-style: none;
-    }
-    .profile-menu li {
-        margin: 0;
-        padding: 3vh 0;
-    }
-    .profile-menu li a{
-        color: #6b6e70;
-    }
-    .profile-menu li a:hover{
-        color: #86C232;
-    }
-
-    .container-dash{
-        padding: 25px 5%;
-        width: 100%;
-        height: 100vh;
-    }
-
-    .dash-cima{
-        width: 100%;
-        height: 450px;
-        padding: 25px 0;
-        display: flex;
-        justify-content: space-between;
-    }
-
-    .dash-baixo{
-        width: 100%;
-        height: 450px;
-        padding: 25px 0;
-    }
-
-    .dash{
-        width: 49%;
-        height: 400px;
-        min-height: max-content;
-
-
-        background: white;
-        border-radius: 10px;
-        border: 2px solid #86C232;
-        box-shadow: 4px 4px 4px 4px rgba(0, 0, 0, 0.4);
-    }
-
-    .dash-boxes{
-        padding: 1%;
-        margin: 2%;
-        
-        border-radius: 10px;
-        background: white;
-        box-shadow: 4px 4px 4px 4px rgba(124, 87, 87, 0.4);
-    }
-
-    .gradiente {
-        margin: 0 auto;
-        background: rgb(0,5,255);
-        background: linear-gradient(90deg, rgba(0,5,255,1) 0%, rgba(0,171,152,1) 25%, rgba(0,255,29,1) 50%, rgba(245,255,0,1) 75%, rgba(255,132,0,1) 100%); 
-    }
-
-    .graficos{
-        margin: 0;
-        width: 90%;
-        height: 300px;
-        border-radius: 10px;
-        margin-top: 28px;
-        margin-left: 50px;
-    }
-
-    .g-grafico-mensal{ 
-        width: 100%;
-    }
+    .side-bar ul li a:hover{
+        cursor: pointer;
+        color: rgba(0,0,0,0.7);
+   }
+   .div-infos{
+        width: 38vw;
+        height: 40vh;
+        margin-right: 2.5vw;
+        margin-top: 2.5vh;
+        border: 1px solid #86C232;
+        border-radius: 2px;
+        float: right;
+   }
+   .ul-flex{
+       padding: 0px;
+       height: 100%;
+       display: flex;
+       list-style: none;
+       border-bottom: 1px solid #86C232;
+   }
+   .ul-flex li{
+       text-align: center;
+       color: #fff;
+       width: 33.33%;
+   }
+   .grafico-barra-linha{
+       margin-left: 2.5vw;
+       margin-top: 2.5vh;
+       float: left;
+       width: 80vw;
+       height: 53vh;
+       border: 1px solid #86C232;
+   }
+   #b_usuario{
+       font-size: 50%;
+       cursor: default;
+   }
