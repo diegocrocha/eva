@@ -1,20 +1,54 @@
+const configuracoes = {
+  db: {
+      server: "serverprojecteva.database.windows.net",
+      user: "adminlocal",
+      password: "#Gfevasprint2",
+      database: "bd_eva",
+      options: {
+          encrypt: true,
+          enableArithAbort: true
+      },
+      pool: {
+          max: 4,
+          min: 1,
+          idleTimeoutMillis: 30000,
+          connectionTimeout: 5000
+      }
+  }
+}
 
-
-
-var mysql = require('mysql');
-var connection = mysql.createConnection({
-  host: 'localhost',
-  port: '3306',
-  user: 'root',
-  password: '',
-  database: 'EVA'
+const sql = require('mssql');
+sql.on('error', err => {
+  console.error(`Erro de Conexão: ${err}`);
 });
 
-connection.connect(function (err) {
-  if (err) throw err;
-  console.log('Conectado com sucesso!')
-});
+
+function conectar() {
+sql.close();
+return sql.connect(configuracoes.db)
+} 
+
+module.exports = {
+  conectar: conectar,
+  sql: sql
+}
 
 
 
-module.exports = connection;
+// var mysql = require('mysql');
+// var connection = mysql.createConnection({
+//   host: 'localhost',
+//   port: '3306',
+//   user: 'root',
+//   password: '',
+//   database: 'EVA'
+// });
+
+// connection.connect(function (err) {
+//   if (err) throw err;
+//   console.log('Conectado com sucesso!')
+// });
+
+
+
+// module.exports = connection;

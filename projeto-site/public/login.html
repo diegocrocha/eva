@@ -70,8 +70,8 @@
 
                 resposta.json().then(json => {
 
-                    sessionStorage.login_usuario_meuapp = json.email;
-                    sessionStorage.nome_usuario_meuapp = json.email;
+                    sessionStorage.login_usuario_meuapp = json.acesso_email;
+                    sessionStorage.nome_usuario_meuapp = json.acesso_email;
                     
                     window.location.href = 'teste_dash.html';
                 });

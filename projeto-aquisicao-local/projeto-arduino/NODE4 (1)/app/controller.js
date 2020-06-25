@@ -121,26 +121,40 @@ router.get('/luminosity', (request, response, next) => {
         const registros_mantidos_tabela_leitura = 8;
 
         if (sorteado == 0) {
-            var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES ('${agora()}',${luminosidade},1);`
+            var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES (CONVERT(Datetime, '${agora()}', 120),${luminosidade},1);`
         }
         else if (sorteado == 1) {
-            var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES ('${agora()}',${luminosidade1},2);`
+            var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES (CONVERT(Datetime, '${agora()}', 120),${luminosidade1},2);`
         }
         else {
-            var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES ('${agora()}',${luminosidade2},3);`
+            var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES (CONVERT(Datetime, '${agora()}', 120),${luminosidade2},3);`
         }
 
-        db.query(sql, function (err, result) {
-            if (err) throw err;
-            console.log("Number of records inserted: " + result.affectedRows);
-            if(result.affectedRows > 10){
-                banco.sql.query(
-                 'DELETE FROM tb_registro order by registro limit 10 ;')
-                }
+        db.conectar().then(() => {
+
+            return db.sql.query(`
+            
+            ${sql}
+            
+            delete from tb_registro where registro not in 
+            (select top ${registros_mantidos_tabela_leitura} registro from tb_registro order by registro desc);`)
+    
+            .then(() => {
+                console.log('Registro inserido com sucesso!');
+            });
+
+            
+            
+    
+        }).catch(erro => {
+    
+            console.error(`Erro ao tentar registrar aquisição na base: ${erro}`);
+    
+        }).finally(() => {
+            db.sql.close();
         });
-        console.log("Number of records inserted: " + result.affectedRows);
         response.sendStatus(200);
-    });
+     });
 
 
 function agora() {
