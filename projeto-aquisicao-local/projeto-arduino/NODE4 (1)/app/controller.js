@@ -117,7 +117,7 @@ router.get('/luminosity', (request, response, next) => {
         luminosidade1 = ArduinoDataLuminosity1.List[ArduinoDataLuminosity1.List.length - 1]
         luminosidade2 = ArduinoDataLuminosity2.List[ArduinoDataLuminosity2.List.length - 1]
 
-        let sorteado = parseInt(Math.random() * 10)
+        let sorteado = parseInt(Math.random() * 7)
 
         const registros_mantidos_tabela_leitura = 8;
 
