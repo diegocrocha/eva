@@ -13,7 +13,7 @@
     <title>EVA - Dashboard</title>
 </head>
 
-<body style="font-size: 1.5em; background-color: #a7a7a7; color: #fff">
+<body style="font-size: 1.5em; background-color: #cccccc; color: #fff">
     <header class="side-bar">
         <ul>
             <li style="padding-left: 28%;"><img src="logo2.png"></li>
@@ -27,28 +27,28 @@
     <div class="container">
         <div id="div_aguarde"></div>
         <div class="container-content" id="div_setores">
-    </div>
-    <div id="popup" class="popup" style="border: solid 2px; display: none;"><b onclick="closeGraph()">X</b>
-        <section style="width:100%">
-            <canvas id="canvas_grafico"></canvas>
-        </section>
-    </div>
-    <div class="div-infos">
-        <div style="height: 35%;">
-            <ul class="ul-flex">
-                <li style="background-color: rgba(100, 100, 255, 0.8);">menor que 300 lumens</li>
-                <li style="background-color: rgba(100, 255, 100, 0.8);">entre 300 e 600 lumens</li>
-                <li style="background-color: rgba(255, 100, 100, 0.8);">maior que 600 lumens</li>
-            </ul>
         </div>
-        <div style="height: 57%; margin-top: 5%;">
-                <canvas style="width: 100px; height: 28px;"  id="grafico-media-estab"></canvas>
+        <div id="popup" class="popup" style="border: solid 2px; display: none;"><b onclick="closeGraph()">X</b>
+            <section style="width:100%">
+                <canvas id="canvas_grafico"></canvas>
+            </section>
         </div>
-    </div>
+        <div class="div-infos">
+            <div style="height: 35%;">
+                <ul class="ul-flex">
+                    <li style="background-color: rgba(100, 100, 255, 0.8);">menor que 300 lumens</li>
+                    <li style="background-color: rgba(100, 255, 100, 0.8);">entre 300 e 600 lumens</li>
+                    <li style="background-color: rgba(255, 100, 100, 0.8);">maior que 600 lumens</li>
+                </ul>
+            </div>
+            <div style="height: 57%; margin-top: 5%;">
+                <canvas style="width: 100px; height: 28px;" id="grafico-media-estab"></canvas>
+            </div>
+        </div>
 
-    <div class="grafico-barra-linha">
-        Grafico barras e linha
-    </div>
+        <div class="grafico-barra-linha">
+            <canvas id="id-grafico-barra-linha" width="80vw" height="25vh" class="chartjs-render-monitor"></canvas>
+        </div>
 </body>
 
 </html>
@@ -253,21 +253,69 @@
 </script>
 <script>
     var graficoEstab = document.getElementById('grafico-media-estab').getContext('2d');
-    var graficoMediaEstab = new Chart (graficoEstab, {
+    var graficoMediaEstab = new Chart(graficoEstab, {
         type: 'line',
-
         data: {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            datasets: [{
+                label: 'Luminosidade x meses',
+                backgroundColor: 'rgb(255, 99, 132)',
+                borderColor: 'rgb(255, 99, 132)',
+                data: [0, 10, 5, 2, 20, 30, 45]
+            }]
+        },
+        options: {
+            responsive: true,
+            tooltips: {
+                mode: 'index',
+                intersect: true
+            }
+        }
+
+    });
+
+
+    var chartData = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
         datasets: [{
-            label: 'Luminosidade x meses',
-            backgroundColor: 'rgb(255, 99, 132)',
-            borderColor: 'rgb(255, 99, 132)',
-            data: [0, 10, 5, 2, 20, 30, 45]
+            type: 'line',
+            label: 'Media do estabelecimento',
+            borderColor: window.chartColors.blue,
+            borderWidth: 2,
+            fill: false,
+            data: [85, 63, 56, 24, 65,325]
+        }, {
+            type: 'bar',
+            label: 'Luminosidade minima registrada',
+            backgroundColor: window.chartColors.red,
+            data: [2, 3, 6, 7, 89, 56],
+            borderColor: 'white',
+            borderWidth: 2
+        }, {
+            type: 'bar',
+            label: 'Luminosidade maxima registrada',
+            backgroundColor: window.chartColors.green,
+            data: [1, 2, 5, 65, 845,325]
         }]
-    },
 
-    // Configuration options go here
-    options: {}
-});
-
+    };
+    chartData.datasets[1].data.push(Math.random() * 1000000);
+    window.onload = function () {
+        var ctx = document.getElementById('id-grafico-barra-linha').getContext('2d');
+        window.myMixedChart = new Chart(ctx, {
+            type: 'bar',
+            data: chartData,
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Chart.js Combo Bar Line Chart'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: true
+                }
+            }
+        });
+    };
 </script>
