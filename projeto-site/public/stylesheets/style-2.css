@@ -515,7 +515,8 @@ body{
         height: 40vh;
         margin-right: 2.5vw;
         margin-top: 2.5vh;
-        border: 1px solid #86C232;
+        background-color: rgba(255,255,255, 0.95);
+        box-shadow: 5px 5px 5px 1px rgba(0,0,0, 0.2);
         border-radius: 2px;
         float: right;
    }
@@ -537,6 +538,8 @@ body{
        float: left;
        width: 80vw;
        height: 53vh;
+       background-color: rgba(255,255,255, 0.95);
+       box-shadow: 5px 5px 5px 1px rgba(0,0,0, 0.2);
        border: 1px solid #86C232;
    }
    #b_usuario{

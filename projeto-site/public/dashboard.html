@@ -13,7 +13,7 @@
     <title>EVA - Dashboard</title>
 </head>
 
-<body style="font-size: 1.5em; background-color: #cccccc; color: #fff">
+<body style="font-size: 1.5em; background-color: #6b6e70; color: #fff">
     <header class="side-bar">
         <ul>
             <li style="padding-left: 28%;"><img src="logo2.png"></li>
@@ -24,15 +24,16 @@
             <li>Sair</li>
         </ul>
     </header>
-    <div class="container">
+    <div>
         <div id="div_aguarde"></div>
-        <div class="container-content" id="div_setores">
-        </div>
+        <div class="container-content" id="div_setores"></div>
+    </div>
         <div id="popup" class="popup" style="border: solid 2px; display: none;"><b onclick="closeGraph()">X</b>
             <section style="width:100%">
                 <canvas id="canvas_grafico"></canvas>
             </section>
         </div>
+
         <div class="div-infos">
             <div style="height: 35%;">
                 <ul class="ul-flex">
@@ -256,12 +257,13 @@
     var graficoMediaEstab = new Chart(graficoEstab, {
         type: 'line',
         data: {
-            labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+                'Outubro', 'Novembro', 'Dezembro'],
             datasets: [{
                 label: 'Luminosidade x meses',
                 backgroundColor: 'rgb(255, 99, 132)',
                 borderColor: 'rgb(255, 99, 132)',
-                data: [0, 10, 5, 2, 20, 30, 45]
+                data: []
             }]
         },
         options: {
@@ -274,6 +276,142 @@
 
     });
 
+    function puxarDadosGraficoMes() {
+        fetch('/leituras/lumensmes', { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (json) {
+
+                    graficoMediaEstab.data.datasets[0].data = [];
+                    let somaMeses = {
+                        "Jan": 0,
+                        "Fev": 0,
+                        "Mar": 0,
+                        "Abr": 0,
+                        "Mai": 0,
+                        "Jun": 0,
+                        "Jul": 0,
+                        "Ago": 0,
+                        "Set": 0,
+                        "Out": 0,
+                        "Nov": 0,
+                        "Dez": 0
+                    };
+                    let mediaMeses = {
+                        "Jan": 0,
+                        "Fev": 0,
+                        "Mar": 0,
+                        "Abr": 0,
+                        "Mai": 0,
+                        "Jun": 0,
+                        "Jul": 0,
+                        "Ago": 0,
+                        "Set": 0,
+                        "Out": 0,
+                        "Nov": 0,
+                        "Dez": 0
+                    };
+                    let contMedia = {
+                        "Jan": 0,
+                        "Fev": 0,
+                        "Mar": 0,
+                        "Abr": 0,
+                        "Mai": 0,
+                        "Jun": 0,
+                        "Jul": 0,
+                        "Ago": 0,
+                        "Set": 0,
+                        "Out": 0,
+                        "Nov": 0,
+                        "Dez": 0
+                    };
+
+                    for(let i = 0; i<json.length; i++){
+                        // console.log(`Dados para media: ${json[i].luminosidade} ,${json[i].registro}`);
+                        if(json[i].registro.indexOf('2020-01') != -1){
+                            somaMeses.Jan = somaMeses.Jan + json[i].luminosidade;
+                            contMedia.Jan = contMedia.Jan + 1;
+                        }
+                        if(json[i].registro.indexOf('2020-02') != -1){
+                            somaMeses.Fev = somaMeses.Fev + json[i].luminosidade;
+                            contMedia.Fev = contMedia.Fev + 1;
+                        }
+                        if(json[i].registro.indexOf('2020-03') != -1){
+                            somaMeses.Mar = somaMeses.Mar + json[i].luminosidade;
+                            contMedia.Mar = contMedia.Mar + 1;
+                        }
+                        if(json[i].registro.indexOf('2020-04') != -1){
+                            somaMeses.Abr = somaMeses.Abr + json[i].luminosidade;
+                            contMedia.Abr = contMedia.Abr + 1;
+                        }
+                        if(json[i].registro.indexOf('2020-05') != -1){
+                            somaMeses.Mai = somaMeses.Mai + json[i].luminosidade;
+                            contMedia.Mai = contMedia.Mai + 1;
+                        }  
+                        if(json[i].registro.indexOf('2020-06') != -1){
+                            somaMeses.Jun = somaMeses.Jun + json[i].luminosidade;
+                            contMedia.Jun = contMedia.Jun + 1;
+                        }
+                        if(json[i].registro.indexOf('2020-07') != -1){
+                            somaMeses.Jul = somaMeses.Jul + json[i].luminosidade;
+                            contMedia.Jul = contMedia.Jul + 1;
+                        }
+                        if(json[i].registro.indexOf('2020-08') != -1){
+                            somaMeses.Ago = somaMeses.Ago + json[i].luminosidade;
+                            contMedia.Ago = contMedia.Ago + 1;
+                        }
+                        if(json[i].registro.indexOf('2020-09') != -1){
+                            somaMeses.Set = somaMeses.Set + json[i].luminosidade;
+                            contMedia.Set = contMedia.Set + 1;
+                        }
+                        if(json[i].registro.indexOf('2020-10') != -1){
+                            somaMeses.Out = somaMeses.Out + json[i].luminosidade;
+                            contMedia.Out = contMedia.Out + 1;
+                        }
+                        if(json[i].registro.indexOf('2020-11') != -1){
+                            somaMeses.Nov = somaMeses.Nov + json[i].luminosidade;
+                            contMedia.Nov = contMedia.Nov + 1;
+                        }
+                        if(json[i].registro.indexOf('2020-12') != -1){
+                            somaMeses.Dez = somaMeses.Dez + json[i].luminosidade;
+                            contMedia.Dez = contMedia.Dez + 1;
+                        }                 
+                    }
+                    let arrayMediaMeses = [
+                        mediaMeses.Jan = somaMeses.Jan / contMedia.Jan,
+                        mediaMeses.Fev = somaMeses.Fev / contMedia.Fev,
+                        mediaMeses.Mar = somaMeses.Mar / contMedia.Mar,
+                        mediaMeses.Abr = somaMeses.Abr / contMedia.Abr,
+                        mediaMeses.Mai = somaMeses.Mai / contMedia.Mai,
+                        mediaMeses.Jun = somaMeses.Jun / contMedia.Jun,
+                        mediaMeses.Jul = somaMeses.Jul / contMedia.Jul,
+                        mediaMeses.Ago = somaMeses.Ago / contMedia.Ago,
+                        mediaMeses.Set = somaMeses.Set / contMedia.Set,
+                        mediaMeses.Out = somaMeses.Out / contMedia.Out,
+                        mediaMeses.Nov = somaMeses.Nov / contMedia.Nov,
+                        mediaMeses.Dez = somaMeses.Dez / contMedia.Dez
+                    ]
+                    for(let i = 0; i < arrayMediaMeses.length;i++){
+                        console.log(`Média do mes ${i+1}: ${arrayMediaMeses[i]},`)
+                        if(arrayMediaMeses[i] == NaN){
+                            arrayMediaMeses[i] = 0;
+                        }
+                        graficoMediaEstab.data.datasets[0].data.push(arrayMediaMeses[i].toFixed(2))
+                    }
+                    
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                setTimeout(atualizarGrafico, 5000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+
+
 
     var chartData = {
         labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -283,7 +421,7 @@
             borderColor: window.chartColors.blue,
             borderWidth: 2,
             fill: false,
-            data: [85, 63, 56, 24, 65,325]
+            data: [85, 63, 56, 24, 65, 325]
         }, {
             type: 'bar',
             label: 'Luminosidade minima registrada',
@@ -295,7 +433,7 @@
             type: 'bar',
             label: 'Luminosidade maxima registrada',
             backgroundColor: window.chartColors.green,
-            data: [1, 2, 5, 65, 845,325]
+            data: [1, 2, 5, 65, 845, 325]
         }]
 
     };
@@ -318,4 +456,8 @@
             }
         });
     };
+
+    puxarDadosGraficoMes();
+
+    setInterval(puxarDadosGraficoMes(), 300000)
 </script>

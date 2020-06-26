@@ -56,8 +56,8 @@ router.get('/estatisticas', function (req, res, next) {
 
 	console.log(`Recuperando as estatísticas atuais`);
 
-	const momento = new Date(new Date() - 1000*60*60);
-	const uma_hora_atras = `${momento.getFullYear()}-${momento.getMonth()+1}-${momento.getDate()} ${momento.getHours()}:${momento.getMinutes()}:00`
+	const momento = new Date(new Date() - 1000 * 60 * 60);
+	const uma_hora_atras = `${momento.getFullYear()}-${momento.getMonth() + 1}-${momento.getDate()} ${momento.getHours()}:${momento.getMinutes()}:00`
 	const instrucaoSql = `select fk_sensor_id, avg(luminosidade) as media 
 						from tb_registro where registro >= '${uma_hora_atras}'
 						group by fk_sensor_id`;
@@ -70,6 +70,23 @@ router.get('/estatisticas', function (req, res, next) {
 			res.status(500).send(erro.message);
 		});
 
+});
+
+router.get('/lumensmes', function (req, res, next) {
+
+	const limite_linhas = 100;
+
+		let instrucaoSql = `select registro,luminosidade from tb_registro;`
+		sequelize.query(instrucaoSql, {
+			model: Leitura,
+			mapToModel: true
+		}).then(resultado => {
+			console.log(`Encontrados: ${resultado}`);
+			res.json(resultado);
+		}).catch(erro => {
+			console.error(erro);
+			res.status(500).send(erro.message);
+		});
 });
 
 
