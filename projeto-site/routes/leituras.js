@@ -81,7 +81,7 @@ router.get('/lumensmes', function (req, res, next) {
 			model: Leitura,
 			mapToModel: true
 		}).then(resultado => {
-			console.log(`Encontrados: ${resultado}`);
+			console.log(`Encontrados: ${resultado.length}`);
 			res.json(resultado);
 		}).catch(erro => {
 			console.error(erro);

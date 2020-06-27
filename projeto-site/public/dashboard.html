@@ -261,7 +261,7 @@
                 'Outubro', 'Novembro', 'Dezembro'],
             datasets: [{
                 label: 'Luminosidade x meses',
-                backgroundColor: 'rgb(255, 99, 132)',
+                backgroundColor: window.chartColors.red,
                 borderColor: 'rgb(255, 99, 132)',
                 data: []
             }]
@@ -276,12 +276,62 @@
 
     });
 
-    function puxarDadosGraficoMes() {
+    var chartData = {
+        labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
+                'Outubro', 'Novembro', 'Dezembro'],
+        datasets: [{
+            type: 'line',
+            label: 'Media do estabelecimento',
+            borderColor: '#000000',
+            borderWidth: 2,
+            fill: false,
+            data: []
+        }, {
+            type: 'bar',
+            label: 'Luminosidade minima registrada',
+            backgroundColor: window.chartColors.red,
+            data: [],
+            borderColor: 'white',
+            borderWidth: 2
+        }, {
+            type: 'bar',
+            label: 'Luminosidade maxima registrada',
+            backgroundColor: window.chartColors.blue,
+            data: []
+        }]
+
+    };
+
+    window.onload = function () {
+        var ctx = document.getElementById('id-grafico-barra-linha').getContext('2d');
+        window.myMixedChart = new Chart(ctx, {
+            type: 'bar',
+            data: chartData,
+            options: {
+                responsive: true,
+                title: {
+                    display: true,
+                    text: 'Minimo, maximo e media'
+                },
+                tooltips: {
+                    mode: 'index',
+                    intersect: true
+                }
+            }
+        });
+    };
+
+    function puxarMediaMes() {
         fetch('/leituras/lumensmes', { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (json) {
 
                     graficoMediaEstab.data.datasets[0].data = [];
+                    chartData.datasets[0].data = [];
+                    chartData.datasets[1].data = [];
+                    chartData.datasets[2].data = [];
+
+                    // Para calcular média e eviar ao grafico
                     let somaMeses = {
                         "Jan": 0,
                         "Fev": 0,
@@ -391,11 +441,278 @@
                         mediaMeses.Dez = somaMeses.Dez / contMedia.Dez
                     ]
                     for(let i = 0; i < arrayMediaMeses.length;i++){
-                        console.log(`Média do mes ${i+1}: ${arrayMediaMeses[i]},`)
-                        if(arrayMediaMeses[i] == NaN){
-                            arrayMediaMeses[i] = 0;
-                        }
+                        
                         graficoMediaEstab.data.datasets[0].data.push(arrayMediaMeses[i].toFixed(2))
+                        chartData.datasets[0].data.push(arrayMediaMeses[i].toFixed(2))
+                    }
+                    // --------------------------------------
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                setTimeout(atualizarGrafico, 5000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function puxarMinMes(){
+        fetch('/leituras/lumensmes', { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (json) {
+
+                    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaa' + json.length)
+
+                    let lumMinMes = {
+                        "Jan": 0,
+                        "Fev": 0,
+                        "Mar": 0,
+                        "Abr": 0,
+                        "Mai": 0,
+                        "Jun": 0,
+                        "Jul": 0,
+                        "Ago": 0,
+                        "Set": 0,
+                        "Out": 0,
+                        "Nov": 0,
+                        "Dez": 0
+                    };
+
+                    for(let i = 0; i < json.length; i++){
+                        if(json[i].registro.indexOf('2020-01') != -1){
+                            if(lumMinMes.Jan == 0){
+                                lumMinMes.Jan = json[i].luminosidade
+                            }else if(lumMinMes.Jan > json[i].luminosidade){
+                                lumMinMes.Jan = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-02') != -1){
+                            if(lumMinMes.Fev == 0){
+                                lumMinMes.Fev = json[i].luminosidade
+                            }else if(lumMinMes.Fev > json[i].luminosidade){
+                                lumMinMes.Fev = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-03') != -1){
+                            if(lumMinMes.Mar == 0){
+                                lumMinMes.Mar = json[i].luminosidade
+                            }else if(lumMinMes.Mar > json[i].luminosidade){
+                                lumMinMes.Mar = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-04') != -1){
+                            if(lumMinMes.Abr == 0){
+                                lumMinMes.Abr = json[i].luminosidade
+                            }else if(lumMinMes.Abr > json[i].luminosidade){
+                                lumMinMes.Abr = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-05') != -1){
+                            if(lumMinMes.Mai == 0){
+                                lumMinMes.Mai = json[i].luminosidade
+                            }else if(lumMinMes.Mai > json[i].luminosidade){
+                                lumMinMes.Mai = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-06') != -1){
+                            if(lumMinMes.Jun == 0){
+                                lumMinMes.Jun = json[i].luminosidade
+                            }else if(lumMinMes.Jun > json[i].luminosidade){
+                                lumMinMes.Jun = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-07') != -1){
+                            if(lumMinMes.Jul == 0){
+                                lumMinMes.Jul = json[i].luminosidade
+                            }else if(lumMinMes.Jul > json[i].luminosidade){
+                                lumMinMes.Jul = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-08') != -1){
+                            if(lumMinMes.Ago == 0){
+                                lumMinMes.Ago = json[i].luminosidade
+                            }else if(lumMinMes.Ago > json[i].luminosidade){
+                                lumMinMes.Ago = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-09') != -1){
+                            if(lumMinMes.Set == 0){
+                                lumMinMes.Set = json[i].luminosidade
+                            }else if(lumMinMes.Set > json[i].luminosidade){
+                                lumMinMes.Set = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-10') != -1){
+                            if(lumMinMes.Out == 0){
+                                lumMinMes.Out = json[i].luminosidade
+                            }else if(lumMinMes.Out > json[i].luminosidade){
+                                lumMinMes.Out = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-11') != -1){
+                            if(lumMinMes.Nov == 0){
+                                lumMinMes.Nov = json[i].luminosidade
+                            }else if(lumMinMes.Nov > json[i].luminosidade){
+                                lumMinMes.Nov = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-12') != -1){
+                            if(lumMinMes.Dez == 0){
+                                lumMinMes.Dez = json[i].luminosidade
+                            }else if(lumMinMes.Dez > json[i].luminosidade){
+                                lumMinMes.Dez = json[i].luminosidade
+                            }
+                        }
+                    }
+                    let arrayMinMeses = [
+                        lumMinMes.Jan,lumMinMes.Fev,lumMinMes.Mar,lumMinMes.Abr,lumMinMes.Mai,
+                        lumMinMes.Jun,lumMinMes.Jul,lumMinMes.Ago,lumMinMes.Set,lumMinMes.Out,
+                        lumMinMes.Nov,lumMinMes.Dez
+                    ];
+                    console.log(arrayMinMeses)
+
+                    for(let i = 0; i < arrayMinMeses.length; i++){
+                        if(arrayMinMeses[i] == 0){
+                            chartData.datasets[1].data.push(0)
+                        }else{
+                            chartData.datasets[1].data.push(arrayMinMeses[i])
+                        }
+                        
+                    }
+                    
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                setTimeout(atualizarGrafico, 5000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+    function puxarMaxMes(){
+        fetch('/leituras/lumensmes', { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (json) {
+
+                    console.log('aaaaaaaaaaaaaaaaaaaaaaaaaaaa' + json.length)
+
+                    let lumMaxMes = {
+                        "Jan": 0,
+                        "Fev": 0,
+                        "Mar": 0,
+                        "Abr": 0,
+                        "Mai": 0,
+                        "Jun": 0,
+                        "Jul": 0,
+                        "Ago": 0,
+                        "Set": 0,
+                        "Out": 0,
+                        "Nov": 0,
+                        "Dez": 0
+                    };
+
+                    for(let i = 0; i < json.length; i++){
+                        if(json[i].registro.indexOf('2020-01') != -1){
+                            if(lumMaxMes.Jan == 0){
+                                lumMaxMes.Jan = json[i].luminosidade
+                            }else if(lumMaxMes.Jan < json[i].luminosidade){
+                                lumMaxMes.Jan = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-02') != -1){
+                            if(lumMaxMes.Fev == 0){
+                                lumMaxMes.Fev = json[i].luminosidade
+                            }else if(lumMaxMes.Fev < json[i].luminosidade){
+                                lumMaxMes.Fev = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-03') != -1){
+                            if(lumMaxMes.Mar == 0){
+                                lumMaxMes.Mar = json[i].luminosidade
+                            }else if(lumMaxMes.Mar < json[i].luminosidade){
+                                lumMaxMes.Mar = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-04') != -1){
+                            if(lumMaxMes.Abr == 0){
+                                lumMaxMes.Abr = json[i].luminosidade
+                            }else if(lumMaxMes.Abr < json[i].luminosidade){
+                                lumMaxMes.Abr = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-05') != -1){
+                            if(lumMaxMes.Mai == 0){
+                                lumMaxMes.Mai = json[i].luminosidade
+                            }else if(lumMaxMes.Mai < json[i].luminosidade){
+                                lumMaxMes.Mai = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-06') != -1){
+                            if(lumMaxMes.Jun == 0){
+                                lumMaxMes.Jun = json[i].luminosidade
+                            }else if(lumMaxMes.Jun < json[i].luminosidade){
+                                lumMaxMes.Jun = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-07') != -1){
+                            if(lumMaxMes.Jul == 0){
+                                lumMaxMes.Jul = json[i].luminosidade
+                            }else if(lumMaxMes.Jul < json[i].luminosidade){
+                                lumMaxMes.Jul = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-08') != -1){
+                            if(lumMaxMes.Ago == 0){
+                                lumMaxMes.Ago = json[i].luminosidade
+                            }else if(lumMaxMes.Ago < json[i].luminosidade){
+                                lumMaxMes.Ago = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-09') != -1){
+                            if(lumMaxMes.Set == 0){
+                                lumMaxMes.Set = json[i].luminosidade
+                            }else if(lumMaxMes.Set < json[i].luminosidade){
+                                lumMaxMes.Set = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-10') != -1){
+                            if(lumMaxMes.Out == 0){
+                                lumMaxMes.Out = json[i].luminosidade
+                            }else if(lumMaxMes.Out < json[i].luminosidade){
+                                lumMaxMes.Out = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-11') != -1){
+                            if(lumMaxMes.Nov == 0){
+                                lumMaxMes.Nov = json[i].luminosidade
+                            }else if(lumMaxMes.Nov < json[i].luminosidade){
+                                lumMaxMes.Nov = json[i].luminosidade
+                            }
+                        }
+                        if(json[i].registro.indexOf('2020-12') != -1){
+                            if(lumMaxMes.Dez == 0){
+                                lumMaxMes.Dez = json[i].luminosidade
+                            }else if(lumMaxMes.Dez < json[i].luminosidade){
+                                lumMaxMes.Dez = json[i].luminosidade
+                            }
+                        }
+                    }
+                    let arrayMaxMeses = [
+                        lumMaxMes.Jan,lumMaxMes.Fev,lumMaxMes.Mar,lumMaxMes.Abr,lumMaxMes.Mai,
+                        lumMaxMes.Jun,lumMaxMes.Jul,lumMaxMes.Ago,lumMaxMes.Set,lumMaxMes.Out,
+                        lumMaxMes.Nov,lumMaxMes.Dez
+                    ];
+                    console.log(arrayMaxMeses)
+
+                    for(let i = 0; i < arrayMaxMeses.length; i++){
+                        if(arrayMaxMeses[i] == 0){
+                            chartData.datasets[2].data.push(0)
+                        }else{
+                            chartData.datasets[2].data.push(arrayMaxMeses[i])
+                        }
+                        
                     }
                     
                 });
@@ -409,55 +726,11 @@
             });
     }
 
+    puxarMinMes();
+    puxarMaxMes();
+    puxarMediaMes();
 
-
-
-
-    var chartData = {
-        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
-        datasets: [{
-            type: 'line',
-            label: 'Media do estabelecimento',
-            borderColor: window.chartColors.blue,
-            borderWidth: 2,
-            fill: false,
-            data: [85, 63, 56, 24, 65, 325]
-        }, {
-            type: 'bar',
-            label: 'Luminosidade minima registrada',
-            backgroundColor: window.chartColors.red,
-            data: [2, 3, 6, 7, 89, 56],
-            borderColor: 'white',
-            borderWidth: 2
-        }, {
-            type: 'bar',
-            label: 'Luminosidade maxima registrada',
-            backgroundColor: window.chartColors.green,
-            data: [1, 2, 5, 65, 845, 325]
-        }]
-
-    };
-    chartData.datasets[1].data.push(Math.random() * 1000000);
-    window.onload = function () {
-        var ctx = document.getElementById('id-grafico-barra-linha').getContext('2d');
-        window.myMixedChart = new Chart(ctx, {
-            type: 'bar',
-            data: chartData,
-            options: {
-                responsive: true,
-                title: {
-                    display: true,
-                    text: 'Chart.js Combo Bar Line Chart'
-                },
-                tooltips: {
-                    mode: 'index',
-                    intersect: true
-                }
-            }
-        });
-    };
-
-    puxarDadosGraficoMes();
-
-    setInterval(puxarDadosGraficoMes(), 300000)
+    setInterval(puxarMediaMes(), 60000)
+    setInterval(puxarMinMes(), 60000)
+    setInterval(puxarMaxMes(), 60000)
 </script>
