@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="stylesheets/style-2.css">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="stylesheets/dash.css">
     <script type="text/javascript" src="https://www.chartjs.org/dist/2.8.0/Chart.min.js"></script>
     <script type="text/javascript" src="https://www.chartjs.org/samples/latest/utils.js"></script>
     <script type="text/javascript" src="funcoes.js"></script>
@@ -37,9 +37,9 @@
         <div class="div-infos">
             <div style="height: 35%;">
                 <ul class="ul-flex">
-                    <li style="background-color: rgba(100, 100, 255, 0.8);">menor que 300 lumens</li>
-                    <li style="background-color: rgba(100, 255, 100, 0.8);">entre 300 e 600 lumens</li>
-                    <li style="background-color: rgba(255, 100, 100, 0.8);">maior que 600 lumens</li>
+                    <li id="li1" style="background-color: rgb(52, 152, 219);">Abaixo de 300 lumens</li>
+                    <li id="li2" style="background-color: rgb(46, 204, 113);">Entre 300 e 600 lumens</li>
+                    <li id="li3" style="background-color: rgb(231, 76, 60);">Acima de 600 lumens</li>
                 </ul>
             </div>
             <div style="height: 57%; margin-top: 5%;">
@@ -104,7 +104,7 @@
     function openGraph(sensor, cor) {
         popup.style.display = "block";
         popup.style.borderColor = cor;
-        obterDadosGrafico(sensor);
+        obterDadosGrafico(sensor, cor);
     }
 
     function closeGraph() {
@@ -121,8 +121,8 @@
             {
                 yAxisID: 'y-luminosidade',
                 label: 'Luminosidade',
-                borderColor: '#2ecc71',
-                backgroundColor: '#2ecc71',
+                borderColor:"",
+                backgroundColor:"",
                 fill: false,
                 data: []
             }
@@ -196,7 +196,7 @@
     // ================================================================================
     // altere aqui como os dados serão exibidos
     // e como são recuperados do BackEnd
-    function obterDadosGrafico(sensor) {
+    function obterDadosGrafico(sensor, cor) {
 
         fetch(`/leituras/ultimas/${sensor}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
@@ -222,7 +222,7 @@
                     }
 
 
-                    plotarGrafico(sensor);
+                    plotarGrafico(sensor, cor);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -236,12 +236,15 @@
 
     // ================================================================================
     // só altere aqui se souber o que está fazendo!
-    function plotarGrafico(sensor) {
+    function plotarGrafico(sensor, cor) {
         console.log('iniciando plotagem do gráfico...');
         let canvas_grafico = document.getElementById('canvas_grafico');
         var ctx = canvas_grafico.getContext('2d');
+        console.log(cor)
         window.grafico_linha = Chart.Line(ctx, {
             data: dados,
+            borderColor: cor,
+            backgroundColor: cor,
             options: configurarGrafico()
         });
 

@@ -491,7 +491,6 @@ body{
        padding: 0px;
    }
    .side-bar ul li{
-
         padding: 5px;
         transition: 0.5s;
    }
@@ -517,21 +516,34 @@ body{
         margin-top: 2.5vh;
         background-color: rgba(255,255,255, 0.95);
         box-shadow: 5px 5px 5px 1px rgba(0,0,0, 0.2);
-        border-radius: 2px;
+        border: solid 1px #86C232;
+        border-radius: 10px;
         float: right;
    }
    .ul-flex{
-       padding: 0px;
+       margin: 1px;
        height: 100%;
-       display: flex;
+       display: grid;
+       grid-template-columns: 1fr 1fr 1fr;
+       grid-template-rows: 1fr;
        list-style: none;
+       align-items: flex-start;
        border-bottom: 1px solid #86C232;
    }
    .ul-flex li{
+       padding: 10px;
+       display: flex;
+       align-items: center;
+       height: 50%;
        text-align: center;
        color: #fff;
-       width: 33.33%;
    }
+   .ul-flex #li1{
+       border-radius: 10px 0 0 0;
+   }
+   .ul-flex #li3{
+    border-radius: 0 10px 0 0;
+}
    .grafico-barra-linha{
        margin-left: 2.5vw;
        margin-top: 2.5vh;
@@ -540,6 +552,7 @@ body{
        height: 53vh;
        background-color: rgba(255,255,255, 0.95);
        box-shadow: 5px 5px 5px 1px rgba(0,0,0, 0.2);
+       border-radius: 10px;
        border: 1px solid #86C232;
    }
    #b_usuario{
