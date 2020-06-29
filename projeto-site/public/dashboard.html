@@ -13,7 +13,7 @@
     <title>EVA - Dashboard</title>
 </head>
 
-<body style="font-size: 1.5em; background-color: #6b6e70; color: #fff">
+<body style="font-size: 1.1em; background-color: #6b6e70; color: #fff">
     <header class="side-bar">
         <ul>
             <li class="logo-dash" ><img src="logo2.png"></li>
@@ -260,13 +260,13 @@
     var graficoMediaEstab = new Chart(graficoEstab, {
         type: 'line',
         data: {
-            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro',
-                'Outubro', 'Novembro', 'Dezembro'],
+            labels: ['7:00', '7:30', '8:00', '8:30', '9:00', '9:30', '10:00'],
             datasets: [{
-                label: 'Luminosidade x meses',
-                backgroundColor: window.chartColors.red,
-                borderColor: 'rgb(255, 99, 132)',
-                data: []
+                label: 'Luminosidade x horas',
+                backgroundColor: '#2ecc71',
+                borderColor: '#2ecc71',
+                fill: false,
+                data: ['400', '420', '427','420','439','440','444']
             }]
         },
         options: {
@@ -292,14 +292,14 @@
         }, {
             type: 'bar',
             label: 'Luminosidade minima registrada',
-            backgroundColor: window.chartColors.red,
+            backgroundColor: '#3498db',
             data: [],
             borderColor: 'white',
             borderWidth: 2
         }, {
             type: 'bar',
             label: 'Luminosidade maxima registrada',
-            backgroundColor: window.chartColors.blue,
+            backgroundColor: '#e74c3c',
             data: []
         }]
 

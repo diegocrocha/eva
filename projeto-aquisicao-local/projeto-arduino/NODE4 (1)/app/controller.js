@@ -117,7 +117,7 @@ router.get('/luminosity', (request, response, next) => {
         luminosidade1 = ArduinoDataLuminosity1.List[ArduinoDataLuminosity1.List.length - 1]
         luminosidade2 = ArduinoDataLuminosity2.List[ArduinoDataLuminosity2.List.length - 1]
 
-        let sorteado = parseInt(Math.random() * 7)
+        let sorteado = parseInt(Math.random() * 12)
 
         const registros_mantidos_tabela_leitura = 8;
 
@@ -139,8 +139,23 @@ router.get('/luminosity', (request, response, next) => {
         else if (sorteado == 5) {
             var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES (CONVERT(Datetime, '${agora()}', 120),${luminosidade},6);`
         }
-        else{
+        else if (sorteado == 6) {
             var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES (CONVERT(Datetime, '${agora()}', 120),${luminosidade2},7);`
+        }
+        else if (sorteado == 7) {
+            var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES (CONVERT(Datetime, '${agora()}', 120),${luminosidade},8);`
+        }
+        else if (sorteado == 8) {
+            var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES (CONVERT(Datetime, '${agora()}', 120),${luminosidade},9);`
+        }
+        else if (sorteado == 9) {
+            var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES (CONVERT(Datetime, '${agora()}', 120),${luminosidade},10);`
+        }
+        else if (sorteado == 10) {
+            var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES (CONVERT(Datetime, '${agora()}', 120),${luminosidade1},11);`
+        }  
+        else{
+            var sql = `INSERT INTO tb_registro (registro,luminosidade,fk_sensor_id) VALUES (CONVERT(Datetime, '${agora()}', 120),${luminosidade2},12);`
         }
 
         db.conectar().then(() => {
