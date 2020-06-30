@@ -485,15 +485,23 @@ body{
     /* ==>DashBoard Page <== */
     .logo-dash{
         padding: 0;
-        margin-left: 28%; 
+        margin-left: 25%; 
         background-color: #fff; 
         border-radius: 10%;
-        height: 90px; 
+        height: 84px; 
         width: 90px;
-        cursor:;
+        margin-top: 4%;
     }
     .logo-dash:hover{
         background: #86C232;
+    }
+
+    #sair_li {
+        margin-top: 420px;
+    }
+
+    #sair:hover {
+        color: red;
     }
    .side-bar{
        width: 12vw;
